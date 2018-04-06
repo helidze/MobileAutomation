@@ -1,0 +1,13 @@
+.idea
+target
+test-output
+resources/export
+resources/screenshots
+resources/rerun/failedTests.txt
+resources/rerun/rerun_suite.xml
+resources/application/ios
+resources/test/images/CustomFormLayout/LocationFiles
+resources/test/images/temp
+resources/application/android
+resources/teamCityBuilds
+*.iml
