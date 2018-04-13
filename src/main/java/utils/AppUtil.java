@@ -312,7 +312,7 @@ public class AppUtil {
      *         AppUtil.getRelativePathToImageWithClass(AddLogo.class.getClassLoader().getResource("src/images/image.bmp");
      */
 
-    @Deprecated
+
     public static String getRelativePathToImageWithClass(final URL classURL) {
         URI uri = null;
         try {

@@ -77,7 +77,7 @@ public class WebDriverUtils {
                         } else {
                             String chromeDriver = "chromedriver.exe";
                             if (SysUtils.isMacOS()) {
-                                chromeDriver = "chromedriver.mac";
+                                chromeDriver = "chromedriver";
                             }
 
                             pathToChromeDriver = WebDriverUtils.class.getClassLoader().getResource("chrome_profile/" + chromeDriver).getPath();

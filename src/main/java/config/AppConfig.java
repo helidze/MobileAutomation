@@ -11,7 +11,8 @@ public abstract class AppConfig {
     private static final String PROPERTY_FILE_NAME = "config1.properties";
     private static final String DEFAULT_ADMIN_LOGIN = "1@1.com";
     private static final String DEFAULT_ADMIN_PASS = "111111";
-
+    private static final String START_URL_MAIN;
+    private static final String HOST;
 
 
 
@@ -38,9 +39,13 @@ public abstract class AppConfig {
     static {
         System.out.println("==> LOAD PROPERTY FILE : " + PROPERTY_FILE_NAME + "\n");
 
+
         Properties properties = AppUtil.loadPropertiesFromClassPath(PROPERTY_FILE_NAME);
         assert properties != null;
-
+        String hostPropertyValue = properties.getProperty("START_URL_MAIN");
+        HOST = hostPropertyValue;
+        System.err.println("==> HOST : " + HOST + "\n");
+        START_URL_MAIN = "https://" + hostPropertyValue;
 
         PLAN_NAME = properties.getProperty("PLAN_NAME");
         System.err.println("==> PLAN_NAME : " + PLAN_NAME + "\n");
@@ -169,6 +174,10 @@ public abstract class AppConfig {
             version = matcher.group().split(":id")[0];
         }
         return version;
+    }
+
+    public static String getStartUrl() {
+        return START_URL_MAIN;
     }
 
     private static String getTeamCityName() {

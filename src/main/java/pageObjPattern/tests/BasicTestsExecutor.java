@@ -43,7 +43,7 @@ import java.util.regex.Pattern;
 
 public class BasicTestsExecutor extends Assert {
 
-    protected Logger LOG = Logger.getLogger(pageObjPattern.tests.BasicTestsExecutor.class);
+    protected Logger LOG = Logger.getLogger(BasicTestsExecutor.class);
 
     protected WebDriver webDriver;
     protected MainPage mainPage;

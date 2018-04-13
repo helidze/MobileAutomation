@@ -160,7 +160,7 @@ public abstract class FileManager {
         return content;
     }
 
-    public static List<String> parseLocalFileToList(String fileName, Integer... waitForFileInSec) {
+    /*public static List<String> parseLocalFileToList(String fileName, Integer... waitForFileInSec) {
         List<String> result = new ArrayList<>();
         URL url = FileManager.class.getClassLoader().getResource(fileName);
         String filePath = AppUtil.getRelativePathToImageWithClass(url);
@@ -182,7 +182,7 @@ public abstract class FileManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     /*public static List<String> getExcelData(String filePath) {
         File f = new File(filePath);
@@ -459,7 +459,7 @@ public abstract class FileManager {
      * Csv file parser.
      */
 
-    public static List<List<String>> getCsvFileData(String filePath, Integer... waitForFileInSec) {
+  /*  public static List<List<String>> getCsvFileData(String filePath, Integer... waitForFileInSec) {
         List<List<String>> fileData = new ArrayList<>();
         List<String> fileLines = parseLocalFileToList(filePath, waitForFileInSec);
         String csvRegex = ",(?=([^\"]*\"[^\"]*\")*[^\"]*$)";
@@ -476,7 +476,7 @@ public abstract class FileManager {
             fileData.add(Arrays.asList(lineValues));
         }
         return fileData;
-    }
+    }*/
 
     /**
      * XML file parser.

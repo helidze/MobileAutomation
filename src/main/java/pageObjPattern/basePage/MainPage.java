@@ -24,7 +24,7 @@ public class MainPage extends Assert {
     }
 
     public MainPage(String folderPath) {
-        fileDownloadPath = getRelativePathToImageWithClass(folderPath);
+        /*fileDownloadPath = getRelativePathToImageWithClass(folderPath);*/
         webDriver = WebDriverUtils.createWebDriverChrome(fileDownloadPath);
         this.basicTestsExecutor = new BasicTestsExecutor(webDriver);
     }
@@ -47,6 +47,7 @@ public class MainPage extends Assert {
     public static MainPage chrome(String folderForDownload) {
         return new MainPage(folderForDownload);
     }
+
 
     private String getRelativePathToImageWithClass(String path) {
         if (path == null)
