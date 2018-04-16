@@ -46,6 +46,7 @@ public class BasicTestsExecutor extends Assert {
     protected Logger LOG = Logger.getLogger(BasicTestsExecutor.class);
 
     protected WebDriver webDriver;
+
     protected MainPage mainPage;
     protected long userID;
 
