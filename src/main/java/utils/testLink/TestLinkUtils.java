@@ -19,18 +19,15 @@ import java.util.Map;
 
 public class TestLinkUtils {
 
+    private static final String PROJECT_NAME = "form.com";
+    private static final String DEV_KEY = "8e3d2bef10be7d6fdd6ea3625f33f37f";
+    private static final String SERVER_URL = "http://testlink.b1.tenet:80/lib/api/xmlrpc/v1/xmlrpc.php";
+    protected static Logger LOG = Logger.getLogger(TestLinkUtils.class);
     private static TestLinkAPI apiTestLink;
     private static int testPlanId;
     private static int buildId;
     private static String buildName;
-
     private static Map<String, String> platformMap = new HashMap<String, String>();
-
-    private static final String PROJECT_NAME = "form.com";
-    private static final String DEV_KEY = "8e3d2bef10be7d6fdd6ea3625f33f37f";
-    private static final String SERVER_URL = "http://testlink.b1.tenet:80/lib/api/xmlrpc/v1/xmlrpc.php";
-
-    protected static Logger LOG = Logger.getLogger(TestLinkUtils.class);
 
     public TestLinkUtils(String buildName) {
         TestLinkUtils.buildName = buildName;
@@ -47,7 +44,7 @@ public class TestLinkUtils {
         apiTestLink = new TestLinkAPI(testlinkURL, DEV_KEY);
         TestPlan testPlan = apiTestLink.getTestPlanByName(AppConfig.getPlanName(), PROJECT_NAME);
         testPlanId = testPlan.getId();
-        apiTestLink.createBuild(testPlanId, buildName, "Auto generated. " );
+        apiTestLink.createBuild(testPlanId, buildName, "Auto generated. ");
         Build[] build = apiTestLink.getBuildsForTestPlan(testPlanId);
         for (Build buildCurrent : build) {
             String buildCurrentName = buildCurrent.getName();

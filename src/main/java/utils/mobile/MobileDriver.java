@@ -17,12 +17,10 @@ import java.util.concurrent.TimeUnit;
 
 public abstract class MobileDriver {
 
-    private static final Logger LOG = Logger.getLogger(MobileDriver.class);
-
     protected static final int APPIUM_PORT = 4723;
     protected static final long COMMAND_TIMEOUT = 12000;
     protected static final String BUNDLE_ID = "com.streamtechltd.fabulive1";
-
+    private static final Logger LOG = Logger.getLogger(MobileDriver.class);
     protected WebDriver webDriver;
     protected AppiumDriver appiumDriver;
 
@@ -53,8 +51,8 @@ public abstract class MobileDriver {
         }
     }
 
-    public void waitForElement(){
-        setImplicitlyWait(3,TimeUnit.SECONDS);
+    public void waitForElement() {
+        setImplicitlyWait(3, TimeUnit.SECONDS);
     }
 
     public String getCurrentUrl() {
@@ -179,7 +177,7 @@ public abstract class MobileDriver {
             File scrFile = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(scrFile, new File(failedTestCaseFolder, "screenshotMobile.png"));
             FileOutputStream fos = new FileOutputStream(new File(failedTestCaseFolder, "page_sourceMobile.html"));
-            if(webDriver instanceof AndroidDriver){
+            if (webDriver instanceof AndroidDriver) {
                 devDriverSwitchTo(DriverWindows.WEBVIEW.getView());
             }
             fos.write(webDriver.getPageSource().getBytes());
@@ -190,7 +188,7 @@ public abstract class MobileDriver {
         } catch (Exception e) {
             LOG.error("An error occurred during screenshot taking: " + e.getMessage());
         } finally {
-            if(webDriver instanceof AndroidDriver){
+            if (webDriver instanceof AndroidDriver) {
                 devDriverSwitchTo(DriverWindows.NATIVE_APP.getView());
             }
         }

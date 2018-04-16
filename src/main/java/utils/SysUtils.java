@@ -72,8 +72,6 @@ public class SysUtils {
     }
 
 
-
-
     public static String getLocalIP() {
         String ipAddress = isLinux() ? getLinuxIP(Arrays.asList("ens18", "enp3s0")) : getNotLinuxIP();
         assert ipAddress != null : "IP Address cannot be 'null'";

@@ -19,13 +19,13 @@ public class SiteLoginPageTestCases extends AccountBasicTestsExecutor {
 
 
     @BeforeClass
-    public void setUp() throws Exception{
+    public void setUp() throws Exception {
         mainPage = MainPage.chrome(null);
         webDriver = mainPage.getWebDriver();
     }
 
     @BeforeMethod
-    public void startTest() throws Exception  {
+    public void startTest() throws Exception {
         if (checkWebDriver(mainPage) == null) {
             mainPage = MainPage.chrome(null);
         }
@@ -35,14 +35,11 @@ public class SiteLoginPageTestCases extends AccountBasicTestsExecutor {
     }
 
 
-
-
-
     @Test(priority = 1)
-    public void positiveLogin(){
+    public void positiveLogin() {
         LOG.info("Open url");
         webDriver.get(AppConfig.getStartUrl());
-       //webDriver.get("https://fab:fabSite123@staging.fabulive.com");
+        //webDriver.get("https://fab:fabSite123@staging.fabulive.com");
         LOG.info("Click SignIn button");
         mainPage.click(By.className("btn--pink"));
         LOG.info("Enter login");
@@ -52,12 +49,12 @@ public class SiteLoginPageTestCases extends AccountBasicTestsExecutor {
         LOG.info("Click Login button");
         webDriver.findElement(By.id("sign_in")).click();
         LOG.info("Check that user logged in");
-        Assert.assertEquals(webDriver.findElement(By.className("userblock__username")).getText(),"NameNewName");
+        Assert.assertEquals(webDriver.findElement(By.className("userblock__username")).getText(), "NameNewName");
 
     }
 
     @Test(priority = 2)
-    public void emptyFieldsLogin(){
+    public void emptyFieldsLogin() {
         LOG.info("Open url");
         webDriver.get(AppConfig.getStartUrl());
         //webDriver.get("https://fab:fabSite123@staging.fabulive.com");
@@ -66,11 +63,11 @@ public class SiteLoginPageTestCases extends AccountBasicTestsExecutor {
         LOG.info("Click Login button");
         webDriver.findElement(By.id("sign_in")).click();
         LOG.info("Check that exception displayed");
-        Assert.assertEquals(webDriver.findElement(By.className("text-field__error")).getText(),"Please, enter a valid data");
+        Assert.assertEquals(webDriver.findElement(By.className("text-field__error")).getText(), "Please, enter a valid data");
     }
 
     @Test(priority = 3)
-    public void incorrectPassword(){
+    public void incorrectPassword() {
         LOG.info("Open url");
         webDriver.get(AppConfig.getStartUrl());
         //webDriver.get("https://fab:fabSite123@staging.fabulive.com");
@@ -82,37 +79,36 @@ public class SiteLoginPageTestCases extends AccountBasicTestsExecutor {
         LOG.info("Click Login button");
         webDriver.findElement(By.id("sign_in")).click();
         LOG.info("Check that exception displayed");
-        if (!webDriver.findElement(By.className("popup__text")).isDisplayed()){
+        if (!webDriver.findElement(By.className("popup__text")).isDisplayed()) {
             webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        } else {
+            Assert.assertEquals(webDriver.findElement(By.className("popup__text")).getText(), "The password you’ve entered is incorrect.\n" +
+                    "Please try again.");
         }
-        else {
-        Assert.assertEquals(webDriver.findElement(By.className("popup__text")).getText(),"The password you’ve entered is incorrect.\n" +
-                "Please try again.");}
     }
 
-   @Test(priority = 4)
-   public void bannerPreview(){
-       LOG.info("Open url");
-       webDriver.get(AppConfig.getStartUrl());
-       LOG.info("Click Video button");
-       webDriver.findElement(By.className("btn--play")).click();
-       LOG.info("Check video");
-       if (!webDriver.findElement(By.xpath("//*[@id=\"advert-video\"]")).isDisplayed()){
-           webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-       }
-       else {
-           Assert.assertTrue(webDriver.findElement(By.xpath("//*[@id=\"advert-video\"]")).isDisplayed());
-       }
-   }
+    @Test(priority = 4)
+    public void bannerPreview() {
+        LOG.info("Open url");
+        webDriver.get(AppConfig.getStartUrl());
+        LOG.info("Click Video button");
+        webDriver.findElement(By.className("btn--play")).click();
+        LOG.info("Check video");
+        if (!webDriver.findElement(By.xpath("//*[@id=\"advert-video\"]")).isDisplayed()) {
+            webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        } else {
+            Assert.assertTrue(webDriver.findElement(By.xpath("//*[@id=\"advert-video\"]")).isDisplayed());
+        }
+    }
 
     @AfterMethod
-    public void doAfterMethod(Method method, ITestResult result) throws Exception{
+    public void doAfterMethod(Method method, ITestResult result) throws Exception {
         addScreenShotToReport(result);
         closeBrowserSession();
     }
 
-   @AfterClass
-    public void tearDown(){
+    @AfterClass
+    public void tearDown() {
         webDriver.quit();
     }
 }

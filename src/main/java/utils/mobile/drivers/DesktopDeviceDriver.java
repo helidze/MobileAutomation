@@ -46,8 +46,12 @@ public class DesktopDeviceDriver extends MobileDriver {
 
     */
 /**
-     * Application Maintenance methods.
-     *//*
+ * Application Maintenance methods.
+ * <p>
+ * Overwrite WebDriver methods.
+ * <p>
+ * Implement Mobile Special methods.
+ *//*
 
 
     private void runDesktopApplication(String appLocation) {
@@ -99,11 +103,11 @@ public class DesktopDeviceDriver extends MobileDriver {
 
     */
 /**
-     * Overwrite WebDriver methods.
-     *//*
+ * Overwrite WebDriver methods.
+ *//*
 
 
-   */
+ */
 /* public void close() {
         if (AppConfig.isUseGrid()) {
             executeSSHCommand("cmd /c taskkill /F /IM WorldAPPDeskTop.exe /T");
@@ -120,8 +124,8 @@ public class DesktopDeviceDriver extends MobileDriver {
 
     */
 /**
-     * Implement Mobile Special methods.
-     *//*
+ * Implement Mobile Special methods.
+ *//*
 
 
     public void takePhoto() {
@@ -178,7 +182,7 @@ public class DesktopDeviceDriver extends MobileDriver {
     }*//*
 
 
-   */
+ */
 /* private void executeSSHCommand(String command) {
         List<String> commandWithParams = getSSHCommandWithParams(command);
         ProcessBuilder pb1 = new ProcessBuilder(commandWithParams);
@@ -190,7 +194,7 @@ public class DesktopDeviceDriver extends MobileDriver {
     }*//*
 
 
-   */
+ */
 /* private List<String> getSSHCommandWithParams(String command) {
         String nodeIp = BuildAgentsFactory.getBuildAgent(AppConfig.getBuildAgentName()).getNodeIp();
         return Arrays.asList("sshpass", "-p", "Abs3tree6mount42", "ssh", "teamcity-automation@" + nodeIp, command);

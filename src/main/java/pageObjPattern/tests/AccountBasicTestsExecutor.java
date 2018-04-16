@@ -9,6 +9,7 @@ import com.keysurvey.api.v81.form.design.WSForm;
 import com.keysurvey.api.v81.form.result.FormResultManagementService;
 import com.keysurvey.api.v81.form.result.WSRespondent;
 import config.AppConfig;*/
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.NoAlertPresentException;
@@ -54,9 +55,9 @@ import java.util.concurrent.TimeUnit;
 
 public class AccountBasicTestsExecutor extends BasicTestsExecutor {
 
+    protected static final Logger LOG = Logger.getLogger(AccountBasicTestsExecutor.class);
     protected String userLogin;
     protected String userPassword;
-
     protected LoginPage loginPage;
     protected String HOST;
     /*protected OfflineLoginPage loginOfflinePage;
@@ -72,8 +73,6 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
     protected RestClient restClient;*/
     protected long surveyId;
 
-    protected static final Logger LOG = Logger.getLogger(AccountBasicTestsExecutor.class);
-
     public String getUserPassword() {
         return userPassword;
     }
@@ -86,11 +85,6 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
         this.userLogin = userLogin;
         this.userPassword = userPassword;
     }
-
-
-
-
-
 
 
     public LoginPage negativeNonExistentLogin(LoginPage loginPage) {
@@ -124,22 +118,18 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
         alert.accept();
     }
 
-
+    public WebDriver openDriverIfNotExists(String folderForDownload) {
+        if (checkWebDriver(mainPage) == null) {
+            mainPage = MainPage.chrome(folderForDownload);
+        }
+        return mainPage.getWebDriver();
+    }
 
 
     public enum VotingType {
         OFFLINE,
         ONLINE,
         MASTER_URL,
-    }
-
-
-
-    public WebDriver openDriverIfNotExists(String folderForDownload) {
-        if (checkWebDriver(mainPage) == null) {
-            mainPage = MainPage.chrome(folderForDownload);
-        }
-        return mainPage.getWebDriver();
     }
 
     /*public OfflineFormsPage loginToPortalByVotingType(VotingType votingType, long portalId, String respondentLogin, String respondentPassword) {

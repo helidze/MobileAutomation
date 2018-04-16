@@ -43,19 +43,46 @@ import java.util.regex.Pattern;
 
 public class BasicTestsExecutor extends Assert {
 
+    private static TestLinkUtils testLinkUtils;
     protected Logger LOG = Logger.getLogger(BasicTestsExecutor.class);
-
     protected WebDriver webDriver;
-
     protected MainPage mainPage;
     protected long userID;
-
     private String testName;
     private long testStartTime;
-
-    private static TestLinkUtils testLinkUtils;
     private int testCaseId;
     private int testCaseExternalId;
+
+    public BasicTestsExecutor() {
+    }
+
+    public BasicTestsExecutor(WebDriver webDriver) {
+        this.webDriver = webDriver;
+    }
+
+    public static Alert waitForAlert(WebDriver webDriver, int seconds) {
+        Wait<WebDriver> wait = new WebDriverWait(webDriver, seconds);
+        return wait.until(alert -> webDriver.switchTo().alert());
+    }
+
+    private static String getBranchFromSelfInfo(String selfInfoResponse) {
+        String branch = "";
+
+        Matcher matcherBranch = Pattern.compile("<span id=\"appBranch\">(.*?)</span>").matcher(selfInfoResponse);
+        if (matcherBranch.find()) {
+            branch = matcherBranch.group(1);
+        }
+        return branch;
+    }
+
+    private static String getBuildFromSelfInfo(String selfInfoResponse) {
+        String build = "";
+        Matcher matcherBuild = Pattern.compile("Build: <span id=\"appBuild\">\\d+</span>").matcher(selfInfoResponse);
+        while (matcherBuild.find()) {
+            build = matcherBuild.group(0).split("Build: <span id=\"appBuild\">")[1].split("</span>")[0];
+        }
+        return build;
+    }
 
     public String getTestName() {
         return testName;
@@ -65,14 +92,9 @@ public class BasicTestsExecutor extends Assert {
         return webDriver;
     }
 
-    public BasicTestsExecutor() {
-    }
-
-    public BasicTestsExecutor(WebDriver webDriver) {
+    public void setWebDriver(WebDriver webDriver) {
         this.webDriver = webDriver;
     }
-
-
 
     @BeforeMethod
     public void doBeforeMethod(Method method) {
@@ -124,7 +146,6 @@ public class BasicTestsExecutor extends Assert {
             webDriver.quit();
         }
     }
-
 
     public WebDriver checkWebDriver(MainPage mainPage) {
         try {
@@ -216,7 +237,7 @@ public class BasicTestsExecutor extends Assert {
         String fileName = "warning.png";
         File file = new File("");
         try {
-            FileUtils.copyFileToDirectory(new File(file.getAbsolutePath() + "/target/test-classes/" + fileName ), new File(file.getAbsolutePath() + "/target/surefire-reports/html/"));
+            FileUtils.copyFileToDirectory(new File(file.getAbsolutePath() + "/target/test-classes/" + fileName), new File(file.getAbsolutePath() + "/target/surefire-reports/html/"));
         } catch (IOException e) {
             LOG.info(e.getMessage());
         }
@@ -250,13 +271,6 @@ public class BasicTestsExecutor extends Assert {
 
             }
         }
-    }
-
-
-
-
-    public void setWebDriver(WebDriver webDriver) {
-        this.webDriver = webDriver;
     }
 
     public long getUserID() {
@@ -296,8 +310,6 @@ public class BasicTestsExecutor extends Assert {
             return v;
         }
     }
-
-
 
     protected boolean isTextPresentInBody(String text) {
         try {
@@ -454,11 +466,6 @@ public class BasicTestsExecutor extends Assert {
                 return Boolean.TRUE;
             }
         });
-    }
-
-    public static Alert waitForAlert(WebDriver webDriver, int seconds) {
-        Wait<WebDriver> wait = new WebDriverWait(webDriver, seconds);
-        return wait.until(alert -> webDriver.switchTo().alert());
     }
 
     protected void waitForNewWindow(int previousNumOfWindows, int timeOutInSeconds) {
@@ -678,7 +685,6 @@ public class BasicTestsExecutor extends Assert {
         webDriver.switchTo().frame(element);
     }
 
-
     public void switchToDefaultContent() {
         webDriver.switchTo().defaultContent();
     }
@@ -832,29 +838,6 @@ public class BasicTestsExecutor extends Assert {
         LOWER_THAN,
         EQUAL,
         NOT_EQUAL
-    }
-
-
-
-
-
-    private static String getBranchFromSelfInfo(String selfInfoResponse) {
-        String branch = "";
-
-        Matcher matcherBranch = Pattern.compile("<span id=\"appBranch\">(.*?)</span>").matcher(selfInfoResponse);
-        if (matcherBranch.find()) {
-            branch = matcherBranch.group(1);
-        }
-        return branch;
-    }
-
-    private static String getBuildFromSelfInfo(String selfInfoResponse) {
-        String build = "";
-        Matcher matcherBuild = Pattern.compile("Build: <span id=\"appBuild\">\\d+</span>").matcher(selfInfoResponse);
-        while (matcherBuild.find()) {
-            build = matcherBuild.group(0).split("Build: <span id=\"appBuild\">")[1].split("</span>")[0];
-        }
-        return build;
     }
 
 }

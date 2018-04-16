@@ -19,41 +19,16 @@ import java.lang.reflect.Method;
 
 public class MobileApplicationExecutor extends AccountBasicTestsExecutor {
 
-    private static Logger LOG = Logger.getLogger(MobileApplicationExecutor.class);
-
-    protected static MobileDriver mobileDriver;
-
+    //TEST RESOURCES
+    protected final static String UPLOAD_IMAGE_PATH = "/Users/georgehelidze/Fabulive_Automation/src/test/resources/ios/Mobile.iOS.ipa";
     //APPLICATION RESOURCES
     private static final String APPLICATION_RESOURCES = "/Users/georgehelidze/Fabulive_Automation/src/test/resources/";
     private static final String DESKTOP_FOLDER = "desktop";
     private static final String ANDROID_FOLDER = "android/";
     private static final String IOS_FOLDER = "ios/";
+    protected static MobileDriver mobileDriver;
+    private static Logger LOG = Logger.getLogger(MobileApplicationExecutor.class);
     private static String appLocation;
-
-    //SURVEY FIELDS
-    protected String surveyName;
-
-
-    //TASK DEFINITION FIELDS
-    protected long taskDefinitionId;
-    protected String taskDefinitionName;
-
-    //CONTACT MANAGER FIELDS
-    protected String contactManagerName;
-    protected long contactManagerId;
-    protected long lookupContactManagerId;
-
-    protected String respondentLogin;
-    protected String respondentPassword;
-
-    //REST SERVICES
-
-
-    //MOBILE PAGES
-    protected MobileLoginPage mobileLoginPage;
-
-    //TEST RESOURCES
-    protected final static String UPLOAD_IMAGE_PATH = "/Users/georgehelidze/Fabulive_Automation/src/test/resources/ios/Mobile.iOS.ipa";
 
     static {
         String appVersion = AppConfig.getAppVersion();
@@ -75,6 +50,31 @@ public class MobileApplicationExecutor extends AccountBasicTestsExecutor {
         LOG.info("# APPLICATION LOCATION: " + appLocation);
     }
 
+    //SURVEY FIELDS
+    protected String surveyName;
+    //TASK DEFINITION FIELDS
+    protected long taskDefinitionId;
+    protected String taskDefinitionName;
+    //CONTACT MANAGER FIELDS
+    protected String contactManagerName;
+    protected long contactManagerId;
+    protected long lookupContactManagerId;
+
+    //REST SERVICES
+    protected String respondentLogin;
+    protected String respondentPassword;
+    //MOBILE PAGES
+    protected MobileLoginPage mobileLoginPage;
+
+    private static void checkApplicationFileForExisting(String pathToFile) {
+        File file = new File(pathToFile);
+        if (!file.exists()) {
+            if (!AppConfig.getTeamcityUrl().equals("")) {
+                new TeamCityUtils().downloadApplication(AppConfig.getUrlFromDownloading(), pathToFile);
+            }
+        }
+    }
+
     @BeforeSuite
     public void basicBeforeSuite() {
         LOG.info("# BEFORE SUITE. Check mobileDriver Server.");
@@ -87,17 +87,6 @@ public class MobileApplicationExecutor extends AccountBasicTestsExecutor {
     public void basicBeforeTestCase() {
         userLogin = UserLogins.USER_PORTAL.getUserLogin();
         userPassword = UserLogins.USER_PORTAL.getUserPassword();
-    }
-
-    @BeforeMethod(alwaysRun = true)
-    public void basicBeforeMethod(Method method) {
-        LOG.info("# BEFORE METHOD. Check mobileDriver instance.");
-        if (mobileDriver != null) {
-            mobileDriver.startMobileDriver(appLocation);
-            mobileLoginPage = new MobileLoginPage(mobileDriver);
-        }
-        surveyName = method.getName() + "_" + System.currentTimeMillis();
-        taskDefinitionName = surveyName;
     }
 
    /* @AfterMethod(alwaysRun = true)
@@ -115,20 +104,22 @@ public class MobileApplicationExecutor extends AccountBasicTestsExecutor {
         clearDataAfterTest(null, null, contactManagerId);
     }*/
 
+    @BeforeMethod(alwaysRun = true)
+    public void basicBeforeMethod(Method method) {
+        LOG.info("# BEFORE METHOD. Check mobileDriver instance.");
+        if (mobileDriver != null) {
+            mobileDriver.startMobileDriver(appLocation);
+            mobileLoginPage = new MobileLoginPage(mobileDriver);
+        }
+        surveyName = method.getName() + "_" + System.currentTimeMillis();
+        taskDefinitionName = surveyName;
+    }
+
     @AfterSuite
     public void basicAfterSuite() {
         LOG.info("# AFTER SUITE. Quite mobile driver.");
         if (mobileDriver != null) {
             mobileDriver.quit();
-        }
-    }
-
-    private static void checkApplicationFileForExisting(String pathToFile) {
-        File file = new File(pathToFile);
-        if (!file.exists()) {
-            if (!AppConfig.getTeamcityUrl().equals("")) {
-                new TeamCityUtils().downloadApplication(AppConfig.getUrlFromDownloading(), pathToFile);
-            }
         }
     }
 

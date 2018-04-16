@@ -38,9 +38,9 @@ public class AppUtil {
      *
      * @param pathFileName String - full path
      * @return last URL's part
-     *         example :
-     *         pathFileName = "http://v69.surveysoftwareservices.com/Member/SurveyLogic/DesignSurveyGoTo.jsp?QID=3822240"
-     *         return - "DesignSurveyGoTo.jsp?QID=3822240"
+     * example :
+     * pathFileName = "http://v69.surveysoftwareservices.com/Member/SurveyLogic/DesignSurveyGoTo.jsp?QID=3822240"
+     * return - "DesignSurveyGoTo.jsp?QID=3822240"
      */
     public static String getURL(String pathFileName) {
         if (AppUtil.isStringEmpty(pathFileName)) return "";
@@ -52,9 +52,9 @@ public class AppUtil {
      *
      * @param pathFileName String - full path
      * @return last URL's part without parametrs
-     *         example :
-     *         pathFileName = "http://v69.surveysoftwareservices.com/Member/SurveyLogic/DesignSurveyGoTo.jsp?QID=3822240"
-     *         return - "DesignSurveyGoTo.jsp"
+     * example :
+     * pathFileName = "http://v69.surveysoftwareservices.com/Member/SurveyLogic/DesignSurveyGoTo.jsp?QID=3822240"
+     * return - "DesignSurveyGoTo.jsp"
      */
 
     public static String getURLWithoutRequestParameters(String pathFileName) {
@@ -69,10 +69,10 @@ public class AppUtil {
      * @param URL           String - full path
      * @param parameterName String - expected parametr
      * @return parametr's value
-     *         example :
-     *         URL = "http://v69.surveysoftwareservices.com/Member/SurveyLogic/DesignSurveyGoTo.jsp?QID=3822240"
-     *         parameterName - "QID"
-     *         return - "3822240"
+     * example :
+     * URL = "http://v69.surveysoftwareservices.com/Member/SurveyLogic/DesignSurveyGoTo.jsp?QID=3822240"
+     * parameterName - "QID"
+     * return - "3822240"
      */
 
     public static String getParameterFromURL(String URL, String parameterName) {
@@ -308,8 +308,8 @@ public class AppUtil {
      *
      * @param classURL URL - path to class, this class contain test, this test must to upload file
      * @return full path
-     *         for example if we have to upload "src\images\image.bmp" in class AddLogo:
-     *         AppUtil.getRelativePathToImageWithClass(AddLogo.class.getClassLoader().getResource("src/images/image.bmp");
+     * for example if we have to upload "src\images\image.bmp" in class AddLogo:
+     * AppUtil.getRelativePathToImageWithClass(AddLogo.class.getClassLoader().getResource("src/images/image.bmp");
      */
 
 
@@ -317,11 +317,11 @@ public class AppUtil {
         URI uri = null;
         try {
             uri = classURL.toURI();
-        } catch ( URISyntaxException e ) {
-            assert false: e.getMessage();
+        } catch (URISyntaxException e) {
+            assert false : e.getMessage();
         }
         String path = Paths.get(uri).toString();
-        if( uri.getPath().endsWith( "/" )){
+        if (uri.getPath().endsWith("/")) {
             path = path + "/";
         }
         return path;

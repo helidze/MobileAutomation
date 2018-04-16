@@ -208,29 +208,29 @@ public abstract class FileManager {
         return result;
     }*/
 
-    public static List<String> getLinesFromFileByPattern( String filePath, String pattern ) {
+    public static List<String> getLinesFromFileByPattern(String filePath, String pattern) {
         List<String> lines = new ArrayList<>();
-        File file = new File( filePath );
+        File file = new File(filePath);
         Scanner s = null;
         try {
-            s = new Scanner( file );
-        } catch ( FileNotFoundException e ) {
+            s = new Scanner(file);
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         int count = 0;
 
         assert s != null;
-        while ( s.hasNextLine() ) {
+        while (s.hasNextLine()) {
             String line = s.nextLine();
 
-            if ( s.nextLine().contains( pattern ) ) {
+            if (s.nextLine().contains(pattern)) {
                 count++;
-                System.out.println( line );
-                lines.add( line );
+                System.out.println(line);
+                lines.add(line);
             }
 
         }
-        System.out.println( "Number of lines containing a pattern: " + count );
+        System.out.println("Number of lines containing a pattern: " + count);
 
         s.close();
         return lines;
