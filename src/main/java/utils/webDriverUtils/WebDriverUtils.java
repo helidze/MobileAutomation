@@ -80,7 +80,7 @@ public class WebDriverUtils {
                                 chromeDriver = "chromedriver";
                             }
 
-                            pathToChromeDriver = WebDriverUtils.class.getClassLoader().getResource("chrome_profile/" + chromeDriver).getPath();
+                            pathToChromeDriver = "/Users/georgehelidze/Fabulive_Automation/src/main/resources/chrome_profile/chromedriver";//WebDriverUtils.class.getClassLoader().getResource("chrome_profile/" + chromeDriver).getPath();
 
 
                             System.out.println("-> Try create ChromeDriver!... ");
