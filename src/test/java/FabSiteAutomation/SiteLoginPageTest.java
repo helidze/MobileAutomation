@@ -1,3 +1,5 @@
+package FabSiteAutomation;
+
 import config.AppConfig;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
@@ -11,9 +13,9 @@ import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 
 
-public class FabuliveLoginPageTestCases extends AccountBasicTestsExecutor {
+public class SiteLoginPageTest extends AccountBasicTestsExecutor {
 
-    private static Logger LOG = Logger.getLogger(FabuliveLoginPageTestCases.class);
+    private static Logger LOG = Logger.getLogger(SiteLoginPageTest.class);
 
 
     @BeforeClass
