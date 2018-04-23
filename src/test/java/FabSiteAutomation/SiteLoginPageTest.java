@@ -98,7 +98,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         }
     }
 
-    @Test
+    @Test(priority = 5)
      public void listOfCategories() throws InterruptedException{
         loginIntoApp();
         Thread.sleep(2500);
@@ -112,7 +112,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
 
     }
 
-    @Test
+    @Test(priority = 6)
     public void checkVideoUpload() throws InterruptedException {
         loginIntoApp();
         Thread.sleep(2500);
@@ -121,7 +121,8 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         LOG.info("Click Upload Video");
         webDriver.findElement(By.id("create_video")).click();
         WebElement fileUpload = webDriver.findElement(By.xpath("//*[@id=\"upload_area\"]/div/form/input"));
-        String filePath = "/Users/georgehelidze/Fabulive_Automation/src/test/resources/videoplayback.mp4";
+        String filePath = SiteLoginPageTest.class.getClassLoader().getResource("videoplayback.mp4").getPath();
+        //String filePath = "/Users/georgehelidze/Fabulive_Automation/src/test/resources/videoplayback.mp4";
         LOG.info("Add video file");
         fileUpload.sendKeys(filePath);
         Thread.sleep(2500);
