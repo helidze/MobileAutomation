@@ -10,11 +10,13 @@ import com.keysurvey.api.v81.form.result.FormResultManagementService;
 import com.keysurvey.api.v81.form.result.WSRespondent;
 import config.AppConfig;*/
 
+import config.AppConfig;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjPattern.basePage.MainPage;
@@ -110,6 +112,15 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
         loginPage.updateTempPasswordWithNew(tempPass, newPass);
     }
 
+    public  List<String> getAllOptions(By by) {
+        List<String> options = new ArrayList<String>();
+        for (WebElement option : new Select(webDriver.findElement(by)).getOptions()) {
+            String txt = option.getText();
+            if (option.getAttribute("value") != "") options.add(option.getText());
+        }
+        return options;
+    }
+
     public void loginInDeactivationAccount(LoginPage loginPage) {
         loginPage.typeLoginAndPassword(userLogin, userPassword);
         loginPage.clickLoginButton();
@@ -131,6 +142,24 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
         ONLINE,
         MASTER_URL,
     }
+    public void loginIntoApp(){
+        LOG.info("Open url");
+        webDriver.get(AppConfig.getStartUrl());
+        //webDriver.get("https://fab:fabSite123@staging.fabulive.com");
+        //waitForPageLoaded(webDriver);
+        waitForPageLoaded1();
+        LOG.info("Click SignIn button");
+        waitForElementDisplayed(By.className("btn--pink"));
+        webDriver.findElement(By.className("btn--pink")).click();
+        LOG.info("Enter login");
+        webDriver.findElement(By.id("email-field")).sendKeys("1@1.com");
+        LOG.info("Enter password");
+        webDriver.findElement(By.id("pass-field")).sendKeys("111111");
+        LOG.info("Click Login button");
+        webDriver.findElement(By.id("sign_in")).click();
+
+    }
+
 
     /*public OfflineFormsPage loginToPortalByVotingType(VotingType votingType, long portalId, String respondentLogin, String respondentPassword) {
         OfflineFormsPage offlineFormsPage;
@@ -441,5 +470,12 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
         waitForPageLoaded(webDriver);
         return new ReportsPage(webDriver);
     }*/
+
+    protected void waitForElementBeDisplayed(WebDriver webDriver, final By locator) {
+        WebDriverWait wait = new WebDriverWait(webDriver, 60);
+        wait.until(result -> webDriver.findElement(locator).isDisplayed());
+    }
+
+
 
 }

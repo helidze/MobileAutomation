@@ -3,7 +3,10 @@ package pageObjPattern.pages.login;
 import config.AppConfig;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjPattern.basePage.BasePage;
 
 import pageObjPattern.pages.login.elements.LoginElements;
@@ -15,6 +18,7 @@ public class LoginPage extends BasePage {
     private static Logger LOG = Logger.getLogger(LoginPage.class);
     private LoginElements loginElements;
 
+
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
         loginElements = new LoginElements();
@@ -23,6 +27,8 @@ public class LoginPage extends BasePage {
     /**
      * Login to application.
      */
+
+
 
     public void typeLoginField(String value) {
         LOG.info("CLEAR and TYPE login field.");

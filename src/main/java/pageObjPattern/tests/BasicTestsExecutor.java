@@ -13,6 +13,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -270,6 +271,28 @@ public class BasicTestsExecutor extends Assert {
                 webDriver.getTitle();
 
             }
+        }
+    }
+
+    public void waitForPageLoaded1() {
+        ExpectedCondition<Boolean> expectationLoad = driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").toString().equals("complete");
+        try {
+            Thread.sleep(250);
+            WebDriverWait waitForLoad = new WebDriverWait(webDriver, 33);
+            waitForLoad.until(expectationLoad);
+        } catch (Throwable error) {
+            Assert.fail("Timeout waiting for Page Load Request to complete.");
+        }
+    }
+
+    public  void waitForAjaxFinished1() {
+        ExpectedCondition<Boolean> expectationAjax = driver -> ((Boolean)((JavascriptExecutor)driver).executeScript("return jQuery.active == 0"));
+        try {
+            Thread.sleep(250);
+            WebDriverWait waitForAjax = new WebDriverWait(webDriver, 33);
+            waitForAjax.until(expectationAjax);
+        } catch (Throwable error) {
+            Assert.fail("Timeout waiting for Ajax Finished to complete.");
         }
     }
 
