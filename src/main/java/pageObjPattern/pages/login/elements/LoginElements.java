@@ -87,6 +87,19 @@ public class LoginElements {
         return By.className("btn--play");
     }
 
+    public By getCategories() {
+        return By.id("categories");
+    }
+
+    public By getNailsCategory() {
+        return By.id("cat_Nails");
+    }
+
+    public By getCategoriesAlert() {
+        return By.className("alert__message");
+    }
+
+
     public By getIncorrectPassError() {
         return By.className("popup__text");
     }

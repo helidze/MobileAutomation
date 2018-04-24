@@ -86,13 +86,13 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
      public void listOfCategories() throws InterruptedException{
         loginIntoApp();
         Thread.sleep(2500);
-        WebElement categories = webDriver.findElement(By.id("categories"));
+        WebElement categories = webDriver.findElement(loginElements.getCategories());
         LOG.info("Open categories");
         categories.click();
         LOG.info("Choose Nails");
-        findElement((By.id("cat_Nails"))).click();
+        findElement((loginElements.getNailsCategory())).click();
         LOG.info("Check that broadcast in Nails category doesn't exist");
-        Assert.assertEquals(findElement(By.className("alert__message")).getText(),"There are no broadcasts in this category. Please, check Home page to explore another broadcasts");
+        Assert.assertEquals(findElement(loginElements.getCategoriesAlert()).getText(),"There are no broadcasts in this category. Please, check Home page to explore another broadcasts");
 
     }
 
@@ -106,7 +106,6 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         webDriver.findElement(By.id("create_video")).click();
         WebElement fileUpload = webDriver.findElement(By.xpath("//*[@id=\"upload_area\"]/div/form/input"));
         String filePath = SiteLoginPageTest.class.getClassLoader().getResource("videoplayback.mp4").getPath();
-        //String filePath = "/Users/georgehelidze/Fabulive_Automation/src/test/resources/videoplayback.mp4";
         LOG.info("Add video file");
         fileUpload.sendKeys(filePath);
         Thread.sleep(2500);
@@ -116,7 +115,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         webDriver.findElement(By.xpath("//*[@id=\"video_name_input\"]")).sendKeys("Video" );
         LOG.info("Add video description");
         webDriver.findElement(By.xpath("//*[@id=\"video_description_input\"]")).sendKeys("AutomationTestCreatedBy" );
-
+        LOG.info("Scroll to the bottom of the page");
         ((JavascriptExecutor) webDriver).executeScript(
                 "arguments[0].scrollIntoView();", webDriver.findElement(By.xpath("//*[@id=\"video_save_btn\"]")));
         Thread.sleep(2500);
