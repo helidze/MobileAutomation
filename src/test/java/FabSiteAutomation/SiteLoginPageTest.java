@@ -54,47 +54,30 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
 
     @Test(priority = 2)
     public void emptyFieldsLogin() {
-        LOG.info("Open url");
-        webDriver.get(AppConfig.getStartUrl());
-        LOG.info("Click SignIn button");
-        mainPage.click(By.className("btn--pink"));
-        LOG.info("Click Login button");
-        webDriver.findElement(By.id("sign_in")).click();
+        loginIntoAppWithEmptyLogin();
         LOG.info("Check that exception displayed");
-        Assert.assertEquals(webDriver.findElement(By.className("text-field__error")).getText(), "Please, enter a valid data");
+        Assert.assertEquals(webDriver.findElement(loginElements.getEmptyLoginError()).getText(), "Please, enter a valid data");
     }
 
     @Test(priority = 3)
     public void incorrectPassword() {
-        LOG.info("Open url");
-        webDriver.get(AppConfig.getStartUrl());
-        LOG.info("Click SignIn button");
-        mainPage.click(By.className("btn--pink"));
-        webDriver.findElement(By.id("email-field")).sendKeys("1@1.com");
-        LOG.info("Enter password");
-        webDriver.findElement(By.id("pass-field")).sendKeys("1111111");
-        LOG.info("Click Login button");
-        webDriver.findElement(By.id("sign_in")).click();
-        LOG.info("Check that exception displayed");
-        if (!webDriver.findElement(By.className("popup__text")).isDisplayed()) {
+        loginIntoAppWithIncorrectPass();
+        if (!webDriver.findElement(loginElements.getIncorrectPassError()).isDisplayed()) {
             webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         } else {
-            Assert.assertEquals(webDriver.findElement(By.className("popup__text")).getText(), "The password you’ve entered is incorrect.\n" +
+            Assert.assertEquals(webDriver.findElement(loginElements.getIncorrectPassError()).getText(), "The password you’ve entered is incorrect.\n" +
                     "Please try again.");
         }
     }
 
     @Test(priority = 4)
     public void bannerPreview() {
-        LOG.info("Open url");
-        webDriver.get(AppConfig.getStartUrl());
-        LOG.info("Click Video button");
-        webDriver.findElement(By.className("btn--play")).click();
+        playVideo();
         LOG.info("Check video");
-        if (!webDriver.findElement(By.xpath("//*[@id=\"advert-video\"]")).isDisplayed()) {
+        if (!webDriver.findElement(loginElements.getDisplayedVideo()).isDisplayed()) {
             webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         } else {
-            Assert.assertTrue(webDriver.findElement(By.xpath("//*[@id=\"advert-video\"]")).isDisplayed());
+            Assert.assertTrue(webDriver.findElement(loginElements.getDisplayedVideo()).isDisplayed());
         }
     }
 
@@ -151,7 +134,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/div/div/div/button[2]")).click();
         Thread.sleep(2500);
         LOG.info("Check that video file doesn't exist");
-        Assert.assertTrue(!webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/main/div/div/div[2]/section[2]/ul/li/div/article/div[4]/a")).isDisplayed());
+        Assert.assertTrue(!webDriver.getPageSource().contains("/html/body/div[1]/div[1]/main/div/div/div[2]/section[2]/ul/li/div/article/div[4]/footer"));
 
 
     }

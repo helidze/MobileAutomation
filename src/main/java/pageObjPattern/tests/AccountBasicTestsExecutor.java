@@ -26,6 +26,7 @@ import pageObjPattern.pages.launch.LaunchPage;
 import pageObjPattern.pages.launch.PublishOnPortalPage;
 */
 import pageObjPattern.pages.login.LoginPage;
+import pageObjPattern.pages.login.elements.LoginElements;
 /*
 import pageObjPattern.pages.offline.OfflineFormsPage;
 import pageObjPattern.pages.offline.OfflineLoginPage;
@@ -60,20 +61,12 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
     protected static final Logger LOG = Logger.getLogger(AccountBasicTestsExecutor.class);
     protected String userLogin;
     protected String userPassword;
-    protected LoginPage loginPage;
+    protected LoginPage loginPage ;
+    protected LoginElements loginElements = new LoginElements();
     protected String HOST;
-    /*protected OfflineLoginPage loginOfflinePage;
-
-    protected SurveysPage surveysPage;
-    protected QuestionListPage questionListPage;
-    protected ReportByRespondentPage reportByRespondentPage;
-
-    protected int counter;
-    protected FormDesignManagementService formDesignManagementService;
-    protected FormResultManagementService formResultManagementService;
+    /*
     protected SurveyHttpService surveyHttpService;
     protected RestClient restClient;*/
-    protected long surveyId;
 
     public String getUserPassword() {
         return userPassword;
@@ -145,8 +138,6 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
     public void loginIntoApp(){
         LOG.info("Open url");
         webDriver.get(AppConfig.getStartUrl());
-        //webDriver.get("https://fab:fabSite123@staging.fabulive.com");
-        //waitForPageLoaded(webDriver);
         waitForPageLoaded1();
         LOG.info("Click SignIn button");
         waitForElementDisplayed(By.className("btn--pink"));
@@ -158,6 +149,38 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
         LOG.info("Click Login button");
         webDriver.findElement(By.id("sign_in")).click();
 
+    }
+
+    public void loginIntoAppWithEmptyLogin(){
+        LOG.info("Open url");
+        webDriver.get(AppConfig.getStartUrl());
+        waitForPageLoaded1();
+        LOG.info("Click SignIn button");
+        mainPage.click(loginElements.getSignInButtonLobby());
+        LOG.info("Click Login button");
+        webDriver.findElement(loginElements.getSignInButton()).click();
+    }
+
+    public void loginIntoAppWithIncorrectPass(){
+        LOG.info("Open url");
+        webDriver.get(AppConfig.getStartUrl());
+        waitForPageLoaded1();
+        LOG.info("Click SignIn button");
+        mainPage.click(loginElements.getSignInButtonLobby());
+        LOG.info("Enter login");
+        webDriver.findElement(loginElements.getInputLoginById()).sendKeys("1@1.com");
+        LOG.info("Enter password");
+        webDriver.findElement(loginElements.getInputPasswordById()).sendKeys("1111111");
+        LOG.info("Click Login button");
+        webDriver.findElement(loginElements.getSignInButton()).click();
+        LOG.info("Check that exception displayed");
+    }
+    public void playVideo(){
+        LOG.info("Open url");
+        webDriver.get(AppConfig.getStartUrl());
+        waitForPageLoaded1();
+        LOG.info("Click Video button");
+        webDriver.findElement(loginElements.getPlayVideoButton()).click();
     }
 
 
