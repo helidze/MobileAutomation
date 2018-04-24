@@ -3,6 +3,7 @@ package FabSiteAutomation;
 import config.AppConfig;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -115,6 +116,9 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         webDriver.findElement(By.xpath("//*[@id=\"video_name_input\"]")).sendKeys("Video" );
         LOG.info("Add video description");
         webDriver.findElement(By.xpath("//*[@id=\"video_description_input\"]")).sendKeys("AutomationTestCreatedBy" );
+
+        ((JavascriptExecutor) webDriver).executeScript(
+                "arguments[0].scrollIntoView();", webDriver.findElement(By.xpath("//*[@id=\"video_save_btn\"]")));
         Thread.sleep(2500);
         LOG.info("Click save button");
         webDriver.findElement(By.xpath("//*[@id=\"video_save_btn\"]")).click();
