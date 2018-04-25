@@ -1,9 +1,6 @@
 package pageObjPattern.pages.login.elements;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 public class LoginElements {
 
@@ -46,6 +43,25 @@ public class LoginElements {
     public By getInputLoginById() {
         return By.id(loginField);
     }
+
+    public By getFacebookInputLoginById() {
+        return By.id("email");
+    }
+
+    public By getFacebookInputPasswordById() {
+        return By.id("pass");
+
+    }
+
+    public By getFacebookLoginButton() {
+        return By.id("pass");
+    }
+
+    public By getFabFacebookButton() {
+        return By.xpath("/html/body/div[1]/div[1]/main/div/div/div[1]/form/button[2]");
+    }
+
+
 
     public String getLoginField() {
         return loginField;
@@ -99,10 +115,23 @@ public class LoginElements {
         return By.className("alert__message");
     }
 
+    public By getForgotPassButton() {
+        return By.xpath("/html/body/div[1]/div[1]/main/div/div/div[1]/form/div[2]/a");
+    }
+
 
     public By getIncorrectPassError() {
         return By.className("popup__text");
     }
+    public By getUserBlockName() {
+        return By.className("userblock__username");
+    }
+
+    public By getResetPasswordButton() {
+        return By.xpath(restPasswordButton);
+    }
+
+    public String restPasswordButton = "/html/body/div[1]/div[1]/main/div/div/div/div[1]/form/button";
 
     public String loginField = "email-field";
 

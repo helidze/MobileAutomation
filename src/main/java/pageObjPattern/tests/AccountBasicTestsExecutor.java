@@ -175,14 +175,51 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
         webDriver.findElement(loginElements.getSignInButton()).click();
         LOG.info("Check that exception displayed");
     }
-    public void playVideo(){
+    public void playVideo() throws InterruptedException{
         LOG.info("Open url");
         webDriver.get(AppConfig.getStartUrl());
         waitForPageLoaded1();
         LOG.info("Click Video button");
         webDriver.findElement(loginElements.getPlayVideoButton()).click();
+        Thread.sleep(10000);
     }
 
+    public void goToResetPassPage(){
+        LOG.info("Open url");
+        webDriver.get(AppConfig.getStartUrl());
+        waitForPageLoaded1();
+        LOG.info("Click SignIn button");
+        waitForElementDisplayed(loginElements.getSignInButtonLobby());
+        webDriver.findElement(loginElements.getSignInButtonLobby()).click();
+        LOG.info("Enter login");
+        webDriver.findElement(loginElements.getInputLoginById()).sendKeys("1@1.com");
+        LOG.info("Click Forgot button");
+        webDriver.findElement(loginElements.getForgotPassButton()).click();
+    }
+
+    public void loginIntoAppByFacebook(){
+        LOG.info("Open url");
+        webDriver.get(AppConfig.getStartUrl());
+        waitForPageLoaded1();
+        LOG.info("Click SignIn button");
+        waitForElementDisplayed(loginElements.getSignInButtonLobby());
+        webDriver.findElement(loginElements.getSignInButtonLobby()).click();
+        LOG.info("Click SignIn via Facebook button");
+        webDriver.findElement(loginElements.getFabFacebookButton()).click();
+        LOG.info("Navigate to facebook window");
+        String winHandleBefore = webDriver.getWindowHandle();
+        for (String winHandle : webDriver.getWindowHandles()){
+            webDriver.switchTo().window(winHandle);
+        }
+        LOG.info("Enter Facebook login");
+        webDriver.findElement(loginElements.getFacebookInputLoginById()).sendKeys("george.helidze@streamtechltd.com");
+        LOG.info("Enter Facebook pass");
+        webDriver.findElement(loginElements.getFacebookInputPasswordById()).sendKeys("a159357a");
+        LOG.info("Click Login");
+        webDriver.findElement(loginElements.getFacebookLoginButton()).submit();
+        LOG.info("Switch to Fabulive window");
+        webDriver.switchTo().window(winHandleBefore);
+    }
 
     /*public OfflineFormsPage loginToPortalByVotingType(VotingType votingType, long portalId, String respondentLogin, String respondentPassword) {
         OfflineFormsPage offlineFormsPage;

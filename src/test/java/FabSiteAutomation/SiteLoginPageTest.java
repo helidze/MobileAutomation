@@ -1,31 +1,27 @@
 package FabSiteAutomation;
 
-import config.AppConfig;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
+
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import pageObjPattern.basePage.MainPage;
-import pageObjPattern.pages.login.LoginPage;
-import pageObjPattern.pages.login.elements.LoginElements;
+
 import pageObjPattern.tests.AccountBasicTestsExecutor;
 
-import java.io.File;
 import java.lang.reflect.Method;
-import java.util.List;
+
 import java.util.concurrent.TimeUnit;
 
 
 public class SiteLoginPageTest extends AccountBasicTestsExecutor {
 
     private static Logger LOG = Logger.getLogger(SiteLoginPageTest.class);
-
 
 
     @BeforeClass
@@ -72,7 +68,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
     }
 
     @Test(priority = 4)
-    public void bannerPreview() {
+    public void bannerPreview() throws InterruptedException {
         playVideo();
         LOG.info("Check video");
         if (!webDriver.findElement(loginElements.getDisplayedVideo()).isDisplayed()) {
@@ -83,7 +79,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
     }
 
     @Test(priority = 5)
-     public void listOfCategories() throws InterruptedException{
+    public void listOfCategories() throws InterruptedException {
         loginIntoApp();
         Thread.sleep(2500);
         WebElement categories = webDriver.findElement(loginElements.getCategories());
@@ -92,7 +88,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         LOG.info("Choose Nails");
         findElement((loginElements.getNailsCategory())).click();
         LOG.info("Check that broadcast in Nails category doesn't exist");
-        Assert.assertEquals(findElement(loginElements.getCategoriesAlert()).getText(),"There are no broadcasts in this category. Please, check Home page to explore another broadcasts");
+        Assert.assertEquals(findElement(loginElements.getCategoriesAlert()).getText(), "There are no broadcasts in this category. Please, check Home page to explore another broadcasts");
 
     }
 
@@ -112,9 +108,9 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         LOG.info("Choose thumbnail");
         webDriver.findElement(By.xpath("//*[@id=\"thumb_1\"]")).click();
         LOG.info("Add video name");
-        webDriver.findElement(By.xpath("//*[@id=\"video_name_input\"]")).sendKeys("Video" );
+        webDriver.findElement(By.xpath("//*[@id=\"video_name_input\"]")).sendKeys("Video");
         LOG.info("Add video description");
-        webDriver.findElement(By.xpath("//*[@id=\"video_description_input\"]")).sendKeys("AutomationTestCreatedBy" );
+        webDriver.findElement(By.xpath("//*[@id=\"video_description_input\"]")).sendKeys("AutomationTestCreatedBy");
         LOG.info("Scroll to the bottom of the page");
         ((JavascriptExecutor) webDriver).executeScript(
                 "arguments[0].scrollIntoView();", webDriver.findElement(By.xpath("//*[@id=\"video_save_btn\"]")));
@@ -139,10 +135,20 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         LOG.info("Check that video file doesn't exist");
         Assert.assertTrue(!webDriver.getPageSource().contains("/html/body/div[1]/div[1]/main/div/div/div[2]/section[2]/ul/li/div/article/div[4]/footer"));
 
-
     }
 
-
+    @Test   (priority = 8)
+    public void resetPasswordTest(){
+        goToResetPassPage();
+        Assert.assertEquals(webDriver.findElement(loginElements.getInputLoginById()).getText(),"1@1.com");
+        Assert.assertTrue(webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/main/div/div/div/div[1]/form/button")).isEnabled());
+    }
+    @Test (priority = 7)
+    public void facebookLoginTest(){
+        loginIntoAppByFacebook();
+        LOG.info("Check that user logged in");
+        Assert.assertEquals(webDriver.findElement(loginElements.getUserBlockName()).getText(), "Ace TestBase");
+    }
 
     @AfterMethod
     public void doAfterMethod(Method method, ITestResult result) throws Exception {
