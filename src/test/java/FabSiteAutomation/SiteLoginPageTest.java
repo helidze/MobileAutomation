@@ -158,6 +158,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         webDriver.findElement(By.id("create_menu")).click();
         LOG.info("Click Go Live");
         webDriver.findElement(loginElements.getGoLiveButton()).click();
+        if (webDriver.findElement(loginElements.getBrodcastTitle()).isDisplayed()){
         LOG.info("Scroll to the bottom of the page");
         ((JavascriptExecutor) webDriver).executeScript(
                 "arguments[0].scrollIntoView();", webDriver.findElement(loginElements.getStartLiveButton()));
@@ -173,7 +174,10 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/div/div/div/button[2]")).click();
         Thread.sleep(1000);
         LOG.info("Check that broadcast ended");
-        Assert.assertEquals(webDriver.findElement(By.className("details__title")).getText(),"Broadcast ended");
+        Assert.assertEquals(webDriver.findElement(By.className("details__title")).getText(),"Broadcast ended");}
+        else {
+            System.out.println("Camera doesn't present, connect camera");
+        }
     }
 
     @AfterMethod

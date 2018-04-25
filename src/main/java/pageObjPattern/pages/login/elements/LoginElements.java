@@ -143,6 +143,12 @@ public class LoginElements {
         return By.className("btn--stop");
     }
 
+    public By getBrodcastTitle() {
+        return By.className("popup__title");
+    }
+
+
+
     public String loginField = "email-field";
 
     public String passwordField = "pass-field";
