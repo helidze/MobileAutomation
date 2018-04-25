@@ -13,6 +13,9 @@ import config.AppConfig;*/
 import config.AppConfig;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
+import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -53,6 +56,7 @@ import utils.httpClient.survey.ResponseType;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -220,6 +224,13 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
         LOG.info("Switch to Fabulive window");
         webDriver.switchTo().window(winHandleBefore);
     }
+
+   /* public void analyzeLog() {
+        LogEntries logEntries = webDriver.manage().logs().get(LogType.BROWSER);
+        for (LogEntry entry : logEntries) {
+            System.out.println(new Date(entry.getTimestamp()) + " " + entry.getLevel() + " " + entry.getMessage());
+            //do something useful with the data
+        }*/
 
     /*public OfflineFormsPage loginToPortalByVotingType(VotingType votingType, long portalId, String respondentLogin, String respondentPassword) {
         OfflineFormsPage offlineFormsPage;
@@ -531,11 +542,11 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
         return new ReportsPage(webDriver);
     }*/
 
-    protected void waitForElementBeDisplayed(WebDriver webDriver, final By locator) {
-        WebDriverWait wait = new WebDriverWait(webDriver, 60);
-        wait.until(result -> webDriver.findElement(locator).isDisplayed());
+        protected void waitForElementBeDisplayed (WebDriver webDriver,final By locator){
+            WebDriverWait wait = new WebDriverWait(webDriver, 60);
+            wait.until(result -> webDriver.findElement(locator).isDisplayed());
+        }
+
+
     }
 
-
-
-}

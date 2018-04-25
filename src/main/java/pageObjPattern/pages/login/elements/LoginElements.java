@@ -127,11 +127,21 @@ public class LoginElements {
         return By.className("userblock__username");
     }
 
-    public By getResetPasswordButton() {
-        return By.xpath(restPasswordButton);
+    public By getGoLiveButton() {
+        return By.id("go_live");
     }
 
-    public String restPasswordButton = "/html/body/div[1]/div[1]/main/div/div/div/div[1]/form/button";
+    public By getStartLiveButton() {
+        return By.xpath("/html/body/div[1]/div[1]/div/div/div/div/div[1]/form/button[1]");
+    }
+
+    public By getPublisherFrame() {
+        return By.id("red5pro-publisher");
+    }
+
+    public By getPublisherStopButton() {
+        return By.className("btn--stop");
+    }
 
     public String loginField = "email-field";
 

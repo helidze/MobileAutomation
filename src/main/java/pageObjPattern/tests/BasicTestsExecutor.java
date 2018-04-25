@@ -209,6 +209,8 @@ public class BasicTestsExecutor extends Assert {
         }
     }
 
+
+
     private String getScreenShotAndGenerateLinkForReport(ITestResult result) {
         String screenShotReportBlock = "";
         if (!result.isSuccess()) {

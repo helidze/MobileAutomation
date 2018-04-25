@@ -41,6 +41,7 @@ public class WebDriverUtils {
             options.addArguments("--disable-popup-blocking");
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-infobars");
+            options.addArguments("use-fake-ui-for-media-stream");
 
             LoggingPreferences loggingPrefs = new LoggingPreferences();
             loggingPrefs.enable(LogType.BROWSER, Level.ALL);

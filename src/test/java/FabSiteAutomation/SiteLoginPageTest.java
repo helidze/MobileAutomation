@@ -150,6 +150,32 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         Assert.assertEquals(webDriver.findElement(loginElements.getUserBlockName()).getText(), "Ace TestBase");
     }
 
+    @Test
+    public void createStreamAndClose() throws InterruptedException{
+        loginIntoApp();
+        Thread.sleep(2500);
+        LOG.info("Click Create Content");
+        webDriver.findElement(By.id("create_menu")).click();
+        LOG.info("Click Go Live");
+        webDriver.findElement(loginElements.getGoLiveButton()).click();
+        LOG.info("Scroll to the bottom of the page");
+        ((JavascriptExecutor) webDriver).executeScript(
+                "arguments[0].scrollIntoView();", webDriver.findElement(loginElements.getStartLiveButton()));
+        Thread.sleep(2000);
+        LOG.info("Click Start Live");
+        webDriver.findElement(loginElements.getStartLiveButton()).click();
+        Thread.sleep(10000);
+        LOG.info("Check that Broadcast Started");
+        Assert.assertTrue(webDriver.findElement(loginElements.getPublisherFrame()).isDisplayed());
+        LOG.info("Click Stop Live Button");
+        webDriver.findElement(loginElements.getPublisherStopButton()).click();
+        LOG.info("Accept Broadcast Stop");
+        webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/div/div/div/button[2]")).click();
+        Thread.sleep(1000);
+        LOG.info("Check that broadcast ended");
+        Assert.assertEquals(webDriver.findElement(By.className("details__title")).getText(),"Broadcast ended");
+    }
+
     @AfterMethod
     public void doAfterMethod(Method method, ITestResult result) throws Exception {
         addScreenShotToReport(result);
