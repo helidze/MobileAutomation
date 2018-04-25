@@ -137,7 +137,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
 
     }
 
-    @Test   (priority = 8)
+    @Test   (priority = 9)
     public void resetPasswordTest(){
         goToResetPassPage();
         Assert.assertEquals(webDriver.findElement(loginElements.getInputLoginById()).getText(),"1@1.com");
@@ -150,7 +150,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         Assert.assertEquals(webDriver.findElement(loginElements.getUserBlockName()).getText(), "Ace TestBase");
     }
 
-    @Test
+    @Test  (priority = 8)
     public void createStreamAndClose() throws InterruptedException{
         loginIntoApp();
         Thread.sleep(2500);
