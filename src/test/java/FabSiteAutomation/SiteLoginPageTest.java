@@ -93,48 +93,27 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
     }
 
     @Test(priority = 6)
-    public void checkVideoUpload() throws InterruptedException {
+    public void checkVideoUploadAndDeleteFromVideoView() throws InterruptedException {
         loginIntoApp();
         Thread.sleep(2500);
-        LOG.info("Click Create Content");
-        webDriver.findElement(By.id("create_menu")).click();
-        LOG.info("Click Upload Video");
-        webDriver.findElement(By.id("create_video")).click();
-        WebElement fileUpload = webDriver.findElement(By.xpath("//*[@id=\"upload_area\"]/div/form/input"));
-        String filePath = SiteLoginPageTest.class.getClassLoader().getResource("videoplayback.mp4").getPath();
-        LOG.info("Add video file");
-        fileUpload.sendKeys(filePath);
+        addVideoFile();
         Thread.sleep(2500);
-        LOG.info("Choose thumbnail");
-        webDriver.findElement(By.xpath("//*[@id=\"thumb_1\"]")).click();
-        LOG.info("Add video name");
-        webDriver.findElement(By.xpath("//*[@id=\"video_name_input\"]")).sendKeys("Video");
-        LOG.info("Add video description");
-        webDriver.findElement(By.xpath("//*[@id=\"video_description_input\"]")).sendKeys("AutomationTestCreatedBy");
-        LOG.info("Scroll to the bottom of the page");
-        ((JavascriptExecutor) webDriver).executeScript(
-                "arguments[0].scrollIntoView();", webDriver.findElement(By.xpath("//*[@id=\"video_save_btn\"]")));
-        Thread.sleep(2500);
-        LOG.info("Click save button");
-        webDriver.findElement(By.xpath("//*[@id=\"video_save_btn\"]")).click();
-        Thread.sleep(2500);
-        LOG.info("Click on avatar button");
-        webDriver.findElement(By.xpath("//*[@id=\"account_menu\"]")).click();
-        LOG.info("Open profile");
-        webDriver.findElement(By.xpath("//*[@id=\"user_link\"]")).click();
-        LOG.info("Open video that was added");
-        webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/main/div/div/div[2]/section[2]/ul/li/div/article/div[4]/a")).click();
-        Thread.sleep(1000);
-        LOG.info("Click on video menu button");
-        webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/main/div/div/div[1]/div[2]/div/button")).click();
-        LOG.info("Click Delete button");
-        webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/main/div/div/div[1]/div[2]/div/ul/li/button")).click();
-        LOG.info("Accept deletion");
-        webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/div/div/div/button[2]")).click();
+        removeVideoFileFromVideoView();
         Thread.sleep(2500);
         LOG.info("Check that video file doesn't exist");
         Assert.assertTrue(!webDriver.getPageSource().contains("/html/body/div[1]/div[1]/main/div/div/div[2]/section[2]/ul/li/div/article/div[4]/footer"));
+    }
 
+    @Test
+    public void checkVideoUploadAndDeleteFromProfilePage() throws InterruptedException {
+        loginIntoApp();
+        Thread.sleep(2500);
+        addVideoFile();
+        Thread.sleep(2500);
+        removeVideoFileFromProfilePage();
+        Thread.sleep(2500);
+        LOG.info("Check that video file doesn't exist");
+        Assert.assertTrue(!webDriver.getPageSource().contains("/html/body/div[1]/div[1]/main/div/div/div[2]/section[2]/ul/li/div/article/div[4]/footer"));
     }
 
     @Test   (priority = 9)
@@ -143,6 +122,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         Assert.assertEquals(webDriver.findElement(loginElements.getInputLoginById()).getText(),"1@1.com");
         Assert.assertTrue(webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/main/div/div/div/div[1]/form/button")).isEnabled());
     }
+
     @Test (priority = 7)
     public void facebookLoginTest(){
         loginIntoAppByFacebook();
