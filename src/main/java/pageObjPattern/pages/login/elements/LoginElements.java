@@ -143,8 +143,8 @@ public class LoginElements {
         return By.className("btn--stop");
     }
 
-    public By getBrodcastTitle() {
-        return By.className("popup__title");
+    public By getBrodcastFilePhoto() {
+        return By.xpath("//*[@id=\"file-foto\"]");
     }
 
 
