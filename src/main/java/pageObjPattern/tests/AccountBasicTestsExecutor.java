@@ -310,7 +310,7 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
        return currentFollowers;
     }
 
-    protected void createNewUser(){
+    protected void createNewUser() throws InterruptedException {
         LOG.info("Open url");
         webDriver.get(AppConfig.getStartUrl());
         waitForPageLoaded1();
@@ -319,6 +319,7 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
         webDriver.findElement(loginElements.getSignInButtonLobby()).click();
         LOG.info("Click SignUp button");
         webDriver.findElement(By.className("auth-form__link--bold")).click();
+        Thread.sleep(1000);
         Date d = new Date(System.currentTimeMillis());
         LOG.info("Enter new user email");
         webDriver.findElement(By.id("email-field")).sendKeys("1"+ d +"@test.com");
@@ -326,6 +327,7 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
         webDriver.findElement(By.id("fullname-field")).sendKeys("autotest"+ d.getSeconds());
         LOG.info("Enter new user password");
         webDriver.findElement(By.id("password-field")).sendKeys("AutoTest123");
+        Thread.sleep(500);
         LOG.info("Click SignUp");
         webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/main/div/div/div[1]/form/button")).click();
 
