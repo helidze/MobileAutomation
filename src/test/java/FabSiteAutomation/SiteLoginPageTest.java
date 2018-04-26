@@ -42,7 +42,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
 
 
     @Test(priority = 1)
-    public void positiveLogin() {
+    public void positiveLoginTest() {
         loginIntoApp();
         LOG.info("Check that user logged in");
         Assert.assertEquals(webDriver.findElement(By.className("userblock__username")).getText(), "NameNewName");
@@ -50,14 +50,14 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
     }
 
     @Test(priority = 2)
-    public void emptyFieldsLogin() {
+    public void emptyFieldsLoginTest() {
         loginIntoAppWithEmptyLogin();
         LOG.info("Check that exception displayed");
         Assert.assertEquals(webDriver.findElement(loginElements.getEmptyLoginError()).getText(), "Please, enter a valid data");
     }
 
     @Test(priority = 3)
-    public void incorrectPassword() {
+    public void incorrectPasswordTest() {
         loginIntoAppWithIncorrectPass();
         if (!webDriver.findElement(loginElements.getIncorrectPassError()).isDisplayed()) {
             webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -68,7 +68,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
     }
 
     @Test(priority = 4)
-    public void bannerPreview() throws InterruptedException {
+    public void bannerPreviewTest() throws InterruptedException {
         playVideo();
         LOG.info("Check video");
         if (!webDriver.findElement(loginElements.getDisplayedVideo()).isDisplayed()) {
@@ -79,7 +79,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
     }
 
     @Test(priority = 5)
-    public void listOfCategories() throws InterruptedException {
+    public void listOfCategoriesTest() throws InterruptedException {
         loginIntoApp();
         Thread.sleep(2500);
         WebElement categories = webDriver.findElement(loginElements.getCategories());
@@ -104,7 +104,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         Assert.assertTrue(!webDriver.getPageSource().contains("/html/body/div[1]/div[1]/main/div/div/div[2]/section[2]/ul/li/div/article/div[4]/footer"));
     }
 
-    @Test
+    @Test(priority = 7)
     public void checkVideoUploadAndDeleteFromProfilePage() throws InterruptedException {
         loginIntoApp();
         Thread.sleep(2500);
@@ -116,42 +116,25 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         Assert.assertTrue(!webDriver.getPageSource().contains("/html/body/div[1]/div[1]/main/div/div/div[2]/section[2]/ul/li/div/article/div[4]/footer"));
     }
 
-    @Test   (priority = 9)
+    @Test   (priority = 10)
     public void resetPasswordTest(){
         goToResetPassPage();
         Assert.assertEquals(webDriver.findElement(loginElements.getInputLoginById()).getText(),"1@1.com");
         Assert.assertTrue(webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/main/div/div/div/div[1]/form/button")).isEnabled());
     }
 
-    @Test (priority = 7)
+    @Test (priority = 8)
     public void facebookLoginTest(){
         loginIntoAppByFacebook();
         LOG.info("Check that user logged in");
         Assert.assertEquals(webDriver.findElement(loginElements.getUserBlockName()).getText(), "Ace TestBase");
     }
 
-    @Test  (priority = 8)
-    public void createStreamAndClose() throws InterruptedException{
+    @Test  (priority = 9)
+    public void createStreamAndCloseTest() throws InterruptedException{
         loginIntoApp();
         Thread.sleep(2500);
-        LOG.info("Click Create Content");
-        webDriver.findElement(By.id("create_menu")).click();
-        LOG.info("Click Go Live");
-        webDriver.findElement(loginElements.getGoLiveButton()).click();
-        Thread.sleep(1000);
-        LOG.info("Scroll to the bottom of the page");
-        ((JavascriptExecutor) webDriver).executeScript(
-                "arguments[0].scrollIntoView();", webDriver.findElement(loginElements.getStartLiveButton()));
-        Thread.sleep(2000);
-        LOG.info("Click Start Live");
-        webDriver.findElement(loginElements.getStartLiveButton()).click();
-        Thread.sleep(10000);
-        LOG.info("Check that Broadcast Started");
-        Assert.assertTrue(webDriver.findElement(loginElements.getPublisherFrame()).isDisplayed());
-        LOG.info("Click Stop Live Button");
-        webDriver.findElement(loginElements.getPublisherStopButton()).click();
-        LOG.info("Accept Broadcast Stop");
-        webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/div/div/div/button[2]")).click();
+        createAndCloseStream();
         Thread.sleep(1000);
         LOG.info("Check that broadcast ended");
         Assert.assertEquals(webDriver.findElement(By.className("details__title")).getText(),"Broadcast ended");
