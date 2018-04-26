@@ -153,6 +153,13 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
 
     }
 
+    @Test
+    public void newUserRegistrationTest(){
+        createNewUser();
+        LOG.info("Check that user created");
+        Assert.assertTrue(webDriver.findElement(By.className("avatar__inner")).isDisplayed());
+    }
+
     @AfterMethod
     public void doAfterMethod(Method method, ITestResult result) throws Exception {
         addScreenShotToReport(result);
