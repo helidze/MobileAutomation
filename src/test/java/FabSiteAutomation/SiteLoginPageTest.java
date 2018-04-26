@@ -154,8 +154,9 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
     }
 
     @Test
-    public void newUserRegistrationTest(){
+    public void newUserRegistrationTest() throws InterruptedException {
         createNewUser();
+        Thread.sleep(1500);
         LOG.info("Check that user created");
         Assert.assertTrue(webDriver.findElement(By.className("avatar__inner")).isDisplayed());
     }
