@@ -147,6 +147,10 @@ public class LoginElements {
         return By.xpath("//*[@id=\"file-foto\"]");
     }
 
+    public By getSearchField() {
+        return By.id("search-field");
+    }
+
 
 
     public String loginField = "email-field";

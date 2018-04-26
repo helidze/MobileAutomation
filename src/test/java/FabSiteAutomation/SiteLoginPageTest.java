@@ -5,8 +5,10 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
@@ -116,21 +118,21 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         Assert.assertTrue(!webDriver.getPageSource().contains("/html/body/div[1]/div[1]/main/div/div/div[2]/section[2]/ul/li/div/article/div[4]/footer"));
     }
 
-    @Test   (priority = 10)
+    @Test(priority = 10)
     public void resetPasswordTest(){
         goToResetPassPage();
         Assert.assertEquals(webDriver.findElement(loginElements.getInputLoginById()).getText(),"1@1.com");
         Assert.assertTrue(webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/main/div/div/div/div[1]/form/button")).isEnabled());
     }
 
-    @Test (priority = 8)
+    @Test(priority = 8)
     public void facebookLoginTest(){
         loginIntoAppByFacebook();
         LOG.info("Check that user logged in");
         Assert.assertEquals(webDriver.findElement(loginElements.getUserBlockName()).getText(), "Ace TestBase");
     }
 
-    @Test  (priority = 9)
+    @Test (priority = 9)
     public void createStreamAndCloseTest() throws InterruptedException{
         loginIntoApp();
         Thread.sleep(2500);
@@ -138,6 +140,17 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         Thread.sleep(1000);
         LOG.info("Check that broadcast ended");
         Assert.assertEquals(webDriver.findElement(By.className("details__title")).getText(),"Broadcast ended");
+    }
+
+    @Test(priority = 11)
+    public void searchTest() throws InterruptedException {
+        loginIntoApp();
+        Thread.sleep(1500);
+        webDriver.findElement(loginElements.getSearchField()).sendKeys("a");
+        ((ChromeDriver) webDriver).getKeyboard().pressKey(Keys.ENTER);
+        Thread.sleep(500);
+        Assert.assertEquals(webDriver.findElement(By.className("username__name")).getText(),"Admin");
+
     }
 
     @AfterMethod
