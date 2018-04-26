@@ -11,6 +11,7 @@ import com.keysurvey.api.v81.form.result.WSRespondent;
 import config.AppConfig;*/
 
 import config.AppConfig;
+import jdk.nashorn.internal.runtime.GlobalFunctions;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.logging.LogEntries;
@@ -298,6 +299,15 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
         webDriver.findElement(loginElements.getPublisherStopButton()).click();
         LOG.info("Accept Broadcast Stop");
         webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/div/div/div/button[2]")).click();
+    }
+
+    protected List<String> getCurrentFollowers(){
+        List<String> currentFollowers = new ArrayList<>();
+        List<WebElement> matches = webDriver.findElements(By.className("username__name"));
+        for (WebElement match : matches) {
+            currentFollowers.add(match.getText());
+        }
+       return currentFollowers;
     }
    /* public void analyzeLog() {
         LogEntries logEntries = webDriver.manage().logs().get(LogType.BROWSER);

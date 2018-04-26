@@ -149,7 +149,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         webDriver.findElement(loginElements.getSearchField()).sendKeys("a");
         ((ChromeDriver) webDriver).getKeyboard().pressKey(Keys.ENTER);
         Thread.sleep(500);
-        Assert.assertEquals(webDriver.findElement(By.className("username__name")).getText(),"Admin");
+        Assert.assertEquals(getCurrentFollowers().get(0),"Admin");
 
     }
 
