@@ -163,7 +163,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
     }
 
     @Test
-    public void viewCreateStreamTest() throws InterruptedException {
+    public void viewStreamBySubscriberTest() throws InterruptedException {
         loginIntoApp();
         Thread.sleep(2500);
         LOG.info("Click Create Content");
