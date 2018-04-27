@@ -1,14 +1,14 @@
 package FabSiteAutomation;
 
 
+import config.AppConfig;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
+import org.junit.experimental.theories.Theories;
+import org.openqa.selenium.*;
 
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.internal.Locatable;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
@@ -18,6 +18,7 @@ import pageObjPattern.tests.AccountBasicTestsExecutor;
 
 import java.lang.reflect.Method;
 
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 
@@ -160,6 +161,63 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         LOG.info("Check that user created");
         Assert.assertTrue(webDriver.findElement(By.className("avatar__inner")).isDisplayed());
     }
+
+    @Test
+    public void viewCreateStreamTest() throws InterruptedException {
+        loginIntoApp();
+        Thread.sleep(2500);
+        LOG.info("Click Create Content");
+        webDriver.findElement(By.id("create_menu")).click();
+        LOG.info("Click Go Live");
+        webDriver.findElement(loginElements.getGoLiveButton()).click();
+        Thread.sleep(1000);
+        LOG.info("Scroll to the bottom of the page");
+        ((JavascriptExecutor) webDriver).executeScript(
+                "arguments[0].scrollIntoView();", webDriver.findElement(loginElements.getStartLiveButton()));
+        Thread.sleep(2000);
+        LOG.info("Click Start Live");
+        webDriver.findElement(loginElements.getStartLiveButton()).click();
+        Thread.sleep(2500);
+        String winHandleBefore = webDriver.getWindowHandle();
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        for (String winHandle:driver.getWindowHandles()) {
+            driver.switchTo().window(winHandle);
+        }
+        LOG.info("Open url");
+        driver.get(AppConfig.getStartUrl());
+        waitForPageLoaded1();
+        LOG.info("Click SignIn button");
+        driver.findElement(By.className("btn--pink")).click();
+        Thread.sleep(1000);
+        LOG.info("Enter login");
+        driver.findElement(By.id("email-field")).sendKeys("2@2.com");
+        LOG.info("Enter password");
+        driver.findElement(By.id("pass-field")).sendKeys("222222");
+        LOG.info("Click Login button");
+        driver.findElement(By.id("sign_in")).click();
+        Thread.sleep(1000);
+        ((JavascriptExecutor)driver).executeScript("window.scrollBy(" + 60 + ","
+                + 631 + ");");
+        Thread.sleep(500);
+        driver.findElement(By.className("card__inner")).click();
+        Thread.sleep(20000);
+        Assert.assertEquals(driver.findElement(By.className("video-stat__item")).getText(),"1");
+        driver.close();
+        webDriver.switchTo().window(winHandleBefore);
+        LOG.info("Click Stop Live Button");
+        webDriver.findElement(loginElements.getPublisherStopButton()).click();
+        LOG.info("Accept Broadcast Stop");
+        webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/div/div/div/button[2]")).click();
+        Thread.sleep(1000);
+        LOG.info("Check that broadcast ended");
+        Assert.assertEquals(webDriver.findElement(By.className("stats__value")).getText(),"1");
+
+
+
+    }
+
+
 
     @AfterMethod
     public void doAfterMethod(Method method, ITestResult result) throws Exception {
