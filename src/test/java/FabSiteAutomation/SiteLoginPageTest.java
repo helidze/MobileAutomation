@@ -218,6 +218,22 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
     }
 
 
+    @Test
+    public void mandatoryGiftsTest() throws InterruptedException {
+        loginIntoApp();
+        Thread.sleep(1500);
+        webDriver.findElement(By.id("gifts")).click();
+        Thread.sleep(4000);
+        ArrayList<String> expectedGifts = new ArrayList<>();
+        expectedGifts.add("Extra Small Package (2 Gifts)");
+        expectedGifts.add("Small Package (6 Gifts)");
+        expectedGifts.add("Medium Package (12 Gifts)");
+        expectedGifts.add("Big Package (60 Gifts)");
+        expectedGifts.add("Huge Package (99 Gifts)");
+        Assert.assertTrue(getCurrentGifts().containsAll(expectedGifts));
+
+    }
+
 
     @AfterMethod
     public void doAfterMethod(Method method, ITestResult result) throws Exception {

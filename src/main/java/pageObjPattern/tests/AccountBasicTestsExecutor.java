@@ -310,6 +310,15 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
        return currentFollowers;
     }
 
+    protected List<String> getCurrentGifts(){
+        List<String> currentGifts = new ArrayList<>();
+        List<WebElement> matches = webDriver.findElements(By.className("package__name"));
+        for (WebElement match : matches) {
+            currentGifts.add(match.getText());
+        }
+       return currentGifts;
+    }
+
     protected void createNewUser() throws InterruptedException {
         LOG.info("Open url");
         webDriver.get(AppConfig.getStartUrl());
