@@ -234,6 +234,13 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
 
     }
 
+    @Test
+    public void popularVideos()throws InterruptedException{
+        loginIntoApp();
+        Thread.sleep(1500);
+        Assert.assertTrue(!getCurrentPopularVideos().isEmpty());
+    }
+
 
     @AfterMethod
     public void doAfterMethod(Method method, ITestResult result) throws Exception {

@@ -319,6 +319,15 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
        return currentGifts;
     }
 
+    protected List<String> getCurrentPopularVideos(){
+        List<String> currentPopularVideos = new ArrayList<>();
+        List<WebElement> matches = webDriver.findElements(By.className("card"));
+        for (WebElement match : matches) {
+            currentPopularVideos.add(match.getText());
+        }
+       return currentPopularVideos;
+    }
+
     protected void createNewUser() throws InterruptedException {
         LOG.info("Open url");
         webDriver.get(AppConfig.getStartUrl());
