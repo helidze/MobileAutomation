@@ -197,11 +197,14 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         LOG.info("Click Login button");
         driver.findElement(By.id("sign_in")).click();
         Thread.sleep(1000);
+        LOG.info("Scroll to live card position");
         ((JavascriptExecutor)driver).executeScript("window.scrollBy(" + 60 + ","
                 + 631 + ");");
         Thread.sleep(500);
+        LOG.info("Click on Live video created before");
         driver.findElement(By.className("card__inner")).click();
         Thread.sleep(20000);
+        LOG.info("Check that video displayed for subscriber");
         Assert.assertEquals(driver.findElement(By.className("video-stat__item")).getText(),"1");
         driver.close();
         webDriver.switchTo().window(winHandleBefore);
@@ -212,9 +215,6 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         Thread.sleep(1000);
         LOG.info("Check that broadcast ended");
         Assert.assertEquals(webDriver.findElement(By.className("stats__value")).getText(),"1");
-
-
-
     }
 
 
@@ -224,21 +224,44 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         Thread.sleep(1500);
         webDriver.findElement(By.id("gifts")).click();
         Thread.sleep(4000);
+        LOG.info("Add main gifts to list");
         ArrayList<String> expectedGifts = new ArrayList<>();
         expectedGifts.add("Extra Small Package (2 Gifts)");
         expectedGifts.add("Small Package (6 Gifts)");
         expectedGifts.add("Medium Package (12 Gifts)");
         expectedGifts.add("Big Package (60 Gifts)");
         expectedGifts.add("Huge Package (99 Gifts)");
+        LOG.info("Check that all gifts is exist on site");
         Assert.assertTrue(getCurrentGifts().containsAll(expectedGifts));
-
     }
 
     @Test
     public void popularVideos()throws InterruptedException{
         loginIntoApp();
         Thread.sleep(1500);
+        LOG.info("Check that popular video isn't empty");
         Assert.assertTrue(!getCurrentPopularVideos().isEmpty());
+    }
+
+    @Test
+    public void checkThatAvatarAddedToNewUser() throws InterruptedException {
+        createNewUser();
+        Thread.sleep(1500);
+        LOG.info("Click on avatar button");
+        webDriver.findElement(By.xpath("//*[@id=\"account_menu\"]")).click();
+        LOG.info("Click edit profile");
+        webDriver.findElement(By.id("edit_profile")).click();
+        WebElement fileUpload = webDriver.findElement(By.xpath("//*[@id=\"avatar-field\"]"));
+        String filePath = AccountBasicTestsExecutor.class.getClassLoader().getResource("avatarTest.jpg").getPath();
+        LOG.info("Add Photo file");
+        fileUpload.sendKeys(filePath);
+        Thread.sleep(2500);
+        LOG.info("Save Avatar");
+        webDriver.findElement(By.className("btn--pink")).click();
+        Thread.sleep(1500);
+        LOG.info("Check that Avatar added");
+        Assert.assertEquals(webDriver.findElement(By.className("alert__message")).getText(),"Avatar successfully updated");
+
     }
 
 
