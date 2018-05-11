@@ -19,6 +19,7 @@ import pageObjPattern.tests.AccountBasicTestsExecutor;
 import java.lang.reflect.Method;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 
@@ -122,7 +123,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
     @Test(priority = 10)
     public void resetPasswordTest(){
         goToResetPassPage();
-        Assert.assertEquals(webDriver.findElement(loginElements.getInputLoginById()).getText(),"1@1.com");
+        Assert.assertEquals(webDriver.findElement(loginElements.getInputLoginById()).getAttribute("value"),"1@1.com");
         Assert.assertTrue(webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/main/div/div/div/div[1]/form/button")).isEnabled());
     }
 
@@ -261,6 +262,28 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         Thread.sleep(1500);
         LOG.info("Check that Avatar added");
         Assert.assertEquals(webDriver.findElement(By.className("alert__message")).getText(),"Avatar successfully updated");
+
+    }
+
+    @Test
+    public void editProfileGeneralInfoTest() throws InterruptedException {
+        createNewUser();
+        Date d = new Date(System.currentTimeMillis());
+        Thread.sleep(1500);
+        LOG.info("Click on avatar button");
+        webDriver.findElement(By.xpath("//*[@id=\"account_menu\"]")).click();
+        LOG.info("Click edit profile");
+        webDriver.findElement(By.id("edit_profile")).click();
+        webDriver.findElement(By.xpath("//*[@id=\"general-info\"]/div/form")).click();
+        webDriver.findElement(By.id("name-field")).sendKeys("testFullName");
+        webDriver.findElement(By.id("nickname-field")).click();
+        webDriver.findElement(By.id("nickname-field")).clear();
+        webDriver.findElement(By.id("nickname-field")).sendKeys("testNickName" + d.getMinutes() + d.getSeconds() + d.getHours());
+        webDriver.findElement(By.id("info-field")).sendKeys("testUserInfo");
+        webDriver.findElement(By.className("btn--pink")).click();
+        webDriver.findElement(By.xpath("/html/body/div[2]/div[1]/main/div/div[1]/ul/li[3]"));
+        webDriver.findElement(By.xpath("//*[@id=\"personal-info\"]/div/form")).click();
+
 
     }
 

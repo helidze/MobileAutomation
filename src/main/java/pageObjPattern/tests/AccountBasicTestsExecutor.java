@@ -342,7 +342,7 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
         LOG.info("Enter new user email");
         webDriver.findElement(By.id("email-field")).sendKeys("1"+ d +"@test.com");
         LOG.info("Enter new user Full name");
-        webDriver.findElement(By.id("fullname-field")).sendKeys("autotest"+ d.getSeconds());
+        webDriver.findElement(By.id("fullname-field")).sendKeys("autotest"+ d.getSeconds() + d.getDate() + d.getMinutes());
         LOG.info("Enter new user password");
         webDriver.findElement(By.id("password-field")).sendKeys("AutoTest123");
         Thread.sleep(500);
