@@ -51,7 +51,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         loginIntoApp();
         LOG.info("Check that user logged in");
         Assert.assertEquals(webDriver.findElement(By.className("userblock__username")).getText(), "NameNewName");
-
+        haltSessions();
     }
 
     @Test(priority = 2)
@@ -59,6 +59,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         loginIntoAppWithEmptyLogin();
         LOG.info("Check that exception displayed");
         Assert.assertEquals(webDriver.findElement(loginElements.getEmptyLoginError()).getText(), "Please, enter a valid data");
+        haltSessions();
     }
 
     @Test(priority = 3)
@@ -70,6 +71,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
             Assert.assertEquals(webDriver.findElement(loginElements.getIncorrectPassError()).getText(), "The password you’ve entered is incorrect.\n" +
                     "Please try again.");
         }
+        haltSessions();
     }
 
     @Test(priority = 4)
@@ -81,6 +83,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         } else {
             Assert.assertTrue(webDriver.findElement(loginElements.getDisplayedVideo()).isDisplayed());
         }
+        haltSessions();
     }
 
     @Test(priority = 5)
@@ -94,7 +97,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         findElement((loginElements.getNailsCategory())).click();
         LOG.info("Check that broadcast in Nails category doesn't exist");
         Assert.assertEquals(findElement(loginElements.getCategoriesAlert()).getText(), "There are no broadcasts in this category. Please, check Home page to explore another broadcasts");
-
+        haltSessions();
     }
 
     @Test(priority = 6)
@@ -107,6 +110,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         Thread.sleep(2500);
         LOG.info("Check that video file doesn't exist");
         Assert.assertTrue(!webDriver.getPageSource().contains("/html/body/div[1]/div[1]/main/div/div/div[2]/section[2]/ul/li/div/article/div[4]/footer"));
+        haltSessions();
     }
 
     @Test(priority = 7)
@@ -119,7 +123,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         Thread.sleep(2500);
         LOG.info("Check that video file doesn't exist");
         Assert.assertTrue(!webDriver.getPageSource().contains("/html/body/div[1]/div[1]/main/div/div/div[2]/section[2]/ul/li/div/article/div[4]/footer"));
-
+        haltSessions();
     }
 
     @Test(priority = 10)
@@ -127,6 +131,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         goToResetPassPage();
         Assert.assertEquals(webDriver.findElement(loginElements.getInputLoginById()).getAttribute("value"),"1@1.com");
         Assert.assertTrue(webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/main/div/div/div/div[1]/form/button")).isEnabled());
+        haltSessions();
     }
 
     @Test(priority = 8)
@@ -134,6 +139,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         loginIntoAppByFacebook();
         LOG.info("Check that user logged in");
         Assert.assertEquals(webDriver.findElement(loginElements.getUserBlockName()).getText(), "Ace TestBase");
+        haltSessions();
     }
 
     @Test (priority = 9)
@@ -144,6 +150,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         Thread.sleep(1000);
         LOG.info("Check that broadcast ended");
         Assert.assertEquals(webDriver.findElement(By.className("details__title")).getText(),"Broadcast ended");
+        haltSessions();
     }
 
     @Test(priority = 12)
@@ -154,7 +161,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         ((ChromeDriver) webDriver).getKeyboard().pressKey(Keys.ENTER);
         Thread.sleep(500);
         Assert.assertEquals(getCurrentFollowers().get(0),"Admin");
-
+        haltSessions();
     }
 
     @Test(priority = 13)
@@ -163,6 +170,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         Thread.sleep(1500);
         LOG.info("Check that user created");
         Assert.assertTrue(webDriver.findElement(By.className("avatar__inner")).isDisplayed());
+        haltSessions();
     }
 
     @Test(priority = 18)
@@ -218,6 +226,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         Thread.sleep(1000);
         LOG.info("Check that broadcast ended");
         Assert.assertEquals(webDriver.findElement(By.className("stats__value")).getText(),"1");
+        haltSessions();
     }
 
     @Test(priority = 19)
@@ -384,6 +393,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         Thread.sleep(1000);
         LOG.info("Check that broadcast ended");
         Assert.assertEquals(webDriver.findElement(By.className("stats__value")).getText(),"3");
+        haltSessions();
     }
 
 
@@ -402,6 +412,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         expectedGifts.add("Huge Package (99 Gifts)");
         LOG.info("Check that all gifts is exist on site");
         Assert.assertTrue(getCurrentGifts().containsAll(expectedGifts));
+        haltSessions();
     }
 
     @Test(priority = 15)
@@ -410,6 +421,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         Thread.sleep(1500);
         LOG.info("Check that popular video isn't empty");
         Assert.assertTrue(!getCurrentPopularVideos().isEmpty());
+        haltSessions();
     }
 
     @Test(priority = 16)
@@ -430,6 +442,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         Thread.sleep(1500);
         LOG.info("Check that Avatar added");
         Assert.assertEquals(webDriver.findElement(By.className("alert__message")).getText(),"Avatar successfully updated");
+        haltSessions();
 
     }
 
@@ -455,6 +468,9 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         webDriver.findElement(By.className("btn--pink")).click();
         LOG.info("Check that UserInfoCorrect");
         Assert.assertEquals(webDriver.findElement(By.id("info-field")).getAttribute("value"),"testUserInfo");
+        haltSessions();
+    }
+
 
     }
-}
+
