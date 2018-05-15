@@ -273,7 +273,7 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
         webDriver.findElement(By.xpath("//*[@id=\"user_link\"]")).click();
         Thread.sleep(1000);
         LOG.info("Click on video menu button");
-        webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/main/div/div/div[2]/section[2]/ul/li/div/article/div[3]")).click();
+        webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/main/div/div/div[2]/section[2]/ul/li/div/article/div[2]/button")).click();
         LOG.info("Click Delete button");
         webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/main/div/div/div[2]/section[2]/ul/li/div/article/div[3]/ul/li/button")).click();
         LOG.info("Accept deletion");

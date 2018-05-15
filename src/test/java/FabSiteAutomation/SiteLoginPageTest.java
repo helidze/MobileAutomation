@@ -119,6 +119,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         Thread.sleep(2500);
         LOG.info("Check that video file doesn't exist");
         Assert.assertTrue(!webDriver.getPageSource().contains("/html/body/div[1]/div[1]/main/div/div/div[2]/section[2]/ul/li/div/article/div[4]/footer"));
+
     }
 
     @Test(priority = 10)
@@ -441,28 +442,19 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         webDriver.findElement(By.xpath("//*[@id=\"account_menu\"]")).click();
         LOG.info("Click edit profile");
         webDriver.findElement(By.id("edit_profile")).click();
+        LOG.info("Click on general info window");
         webDriver.findElement(By.xpath("//*[@id=\"general-info\"]/div/form")).click();
+        LOG.info("Change fullName");
         webDriver.findElement(By.id("name-field")).sendKeys("testFullName");
         webDriver.findElement(By.id("nickname-field")).click();
         webDriver.findElement(By.id("nickname-field")).clear();
+        LOG.info("Change nickname");
         webDriver.findElement(By.id("nickname-field")).sendKeys("testNickName" + d.getMinutes() + d.getSeconds() + d.getHours());
+        LOG.info("Change UserInfo");
         webDriver.findElement(By.id("info-field")).sendKeys("testUserInfo");
         webDriver.findElement(By.className("btn--pink")).click();
+        LOG.info("Check that UserInfoCorrect");
         Assert.assertEquals(webDriver.findElement(By.id("info-field")).getAttribute("value"),"testUserInfo");
 
-
-
-    }
-
-
-    @AfterMethod
-    public void doAfterMethod(Method method, ITestResult result) throws Exception {
-        addScreenShotToReport(result);
-        closeBrowserSession();
-    }
-
-    @AfterClass
-    public void tearDown() {
-        webDriver.quit();
     }
 }

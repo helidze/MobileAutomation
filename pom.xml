@@ -67,6 +67,18 @@
 
 
     <!-- testing -->
+      <dependency>
+          <groupId>org.uncommons</groupId>
+          <artifactId>reportng</artifactId>
+          <version>1.1.4</version>
+          <exclusions>
+              <exclusion>
+                  <groupId>org.testng</groupId>
+                  <artifactId>testng</artifactId>
+              </exclusion>
+          </exclusions>
+      </dependency>
+
     <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-test</artifactId>

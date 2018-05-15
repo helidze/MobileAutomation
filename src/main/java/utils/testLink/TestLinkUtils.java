@@ -19,7 +19,7 @@ import java.util.Map;
 
 public class TestLinkUtils {
 
-    private static final String PROJECT_NAME = "form.com";
+    private static final String PROJECT_NAME = "fabulive.com";
     private static final String DEV_KEY = "8e3d2bef10be7d6fdd6ea3625f33f37f";
     private static final String SERVER_URL = "http://testlink.b1.tenet:80/lib/api/xmlrpc/v1/xmlrpc.php";
     protected static Logger LOG = Logger.getLogger(TestLinkUtils.class);
