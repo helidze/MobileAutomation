@@ -145,7 +145,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         Assert.assertEquals(webDriver.findElement(By.className("details__title")).getText(),"Broadcast ended");
     }
 
-    @Test(priority = 11)
+    @Test(priority = 12)
     public void searchTest() throws InterruptedException {
         loginIntoApp();
         Thread.sleep(1500);
@@ -156,7 +156,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
 
     }
 
-    @Test
+    @Test(priority = 13)
     public void newUserRegistrationTest() throws InterruptedException {
         createNewUser();
         Thread.sleep(1500);
@@ -164,7 +164,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         Assert.assertTrue(webDriver.findElement(By.className("avatar__inner")).isDisplayed());
     }
 
-    @Test
+    @Test(priority = 18)
     public void viewStreamBySubscriberTest() throws InterruptedException {
         loginIntoApp();
         Thread.sleep(2500);
@@ -204,7 +204,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
                 + 631 + ");");
         Thread.sleep(500);
         LOG.info("Click on Live video created before");
-        driver.findElement(By.className("card__inner")).click();
+        driver.findElement(By.partialLinkText("TestStream")).click();
         Thread.sleep(20000);
         LOG.info("Check that video displayed for subscriber");
         Assert.assertEquals(driver.findElement(By.className("video-stat__item")).getText(),"1");
@@ -219,7 +219,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         Assert.assertEquals(webDriver.findElement(By.className("stats__value")).getText(),"1");
     }
 
-    @Test
+    @Test(priority = 19)
     public void viewStreamBy5Subscribers() throws InterruptedException {
         loginIntoApp();
         Thread.sleep(2500);
@@ -284,9 +284,9 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         ((JavascriptExecutor)driver1).executeScript("window.scrollBy(" + 60 + ","
                 + 631 + ");");
         Thread.sleep(500);
-        driver.findElement(By.partialLinkText("TestStream")).click();
+
         LOG.info("Click on Live video created before");
-        driver1.findElement(By.className("card__inner")).click();
+        driver1.findElement(By.partialLinkText("TestStream")).click();
         Thread.sleep(20000);
         LOG.info("Check that video displayed for subscriber");
         Assert.assertEquals(driver1.findElement(By.className("video-stat__item")).getText(),"2");
@@ -312,9 +312,9 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         ((JavascriptExecutor)driver2).executeScript("window.scrollBy(" + 60 + ","
                 + 631 + ");");
         Thread.sleep(500);
-        driver.findElement(By.partialLinkText("TestStream")).click();
+
         LOG.info("Click on Live video created before");
-        driver2.findElement(By.className("card__inner")).click();
+        driver2.findElement(By.partialLinkText("TestStream")).click();
         Thread.sleep(20000);
         LOG.info("Check that video displayed for subscriber");
         Assert.assertEquals(driver2.findElement(By.className("video-stat__item")).getText(),"3");
@@ -386,7 +386,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
     }
 
 
-    @Test
+    @Test(priority = 14)
     public void mandatoryGiftsTest() throws InterruptedException {
         loginIntoApp();
         Thread.sleep(1500);
@@ -403,7 +403,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         Assert.assertTrue(getCurrentGifts().containsAll(expectedGifts));
     }
 
-    @Test
+    @Test(priority = 15)
     public void popularVideos()throws InterruptedException{
         loginIntoApp();
         Thread.sleep(1500);
@@ -411,7 +411,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         Assert.assertTrue(!getCurrentPopularVideos().isEmpty());
     }
 
-    @Test
+    @Test(priority = 16)
     public void checkThatAvatarAddedToNewUser() throws InterruptedException {
         createNewUser();
         Thread.sleep(1500);
@@ -432,7 +432,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
 
     }
 
-    @Test
+    @Test(priority = 17)
     public void editProfileGeneralInfoTest() throws InterruptedException {
         createNewUser();
         Date d = new Date(System.currentTimeMillis());
