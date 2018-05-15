@@ -256,7 +256,7 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
         LOG.info("Open profile");
         webDriver.findElement(By.xpath("//*[@id=\"user_link\"]")).click();
         LOG.info("Open video that was added");
-        webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/main/div/div/div[2]/section[2]/ul/li/div/article/div[4]/a")).click();
+        webDriver.findElement(By.partialLinkText("videoplaybackVideo")).click();
         Thread.sleep(1000);
         LOG.info("Click on video menu button");
         webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/main/div/div/div[1]/div[2]/div/button")).click();
