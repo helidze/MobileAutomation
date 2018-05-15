@@ -20,6 +20,7 @@ import java.lang.reflect.Method;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
@@ -218,6 +219,172 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         Assert.assertEquals(webDriver.findElement(By.className("stats__value")).getText(),"1");
     }
 
+    @Test
+    public void viewStreamBy5Subscribers() throws InterruptedException {
+        loginIntoApp();
+        Thread.sleep(2500);
+        LOG.info("Click Create Content");
+        webDriver.findElement(By.id("create_menu")).click();
+        LOG.info("Click Go Live");
+        webDriver.findElement(loginElements.getGoLiveButton()).click();
+        Thread.sleep(1000);
+        LOG.info("Scroll to the bottom of the page");
+        ((JavascriptExecutor) webDriver).executeScript(
+                "arguments[0].scrollIntoView();", webDriver.findElement(loginElements.getStartLiveButton()));
+        Thread.sleep(2000);
+        LOG.info("Click Start Live");
+        webDriver.findElement(loginElements.getStartLiveButton()).click();
+        Thread.sleep(2500);
+        String winHandleBefore = webDriver.getWindowHandle();
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        for (String winHandle:driver.getWindowHandles()) {
+            driver.switchTo().window(winHandle);
+        }
+        LOG.info("Open url");
+        driver.get(AppConfig.getStartUrl());
+        waitForPageLoaded1();
+        LOG.info("Click SignIn button");
+        driver.findElement(By.className("btn--pink")).click();
+        Thread.sleep(1000);
+        LOG.info("Enter login");
+        driver.findElement(By.id("email-field")).sendKeys("2@2.com");
+        LOG.info("Enter password");
+        driver.findElement(By.id("pass-field")).sendKeys("222222");
+        LOG.info("Click Login button");
+        driver.findElement(By.id("sign_in")).click();
+        Thread.sleep(1000);
+        LOG.info("Scroll to live card position");
+        ((JavascriptExecutor)driver).executeScript("window.scrollBy(" + 60 + ","
+                + 631 + ");");
+        Thread.sleep(500);
+        driver.findElement(By.partialLinkText("TestStream")).click();
+        Thread.sleep(20000);
+        LOG.info("Check that video displayed for subscriber");
+        Assert.assertEquals(driver.findElement(By.className("video-stat__item")).getText(),"1");
+        WebDriver driver1 = new ChromeDriver();
+        driver1.manage().window().maximize();
+        for (String winHandle:driver1.getWindowHandles()) {
+            driver1.switchTo().window(winHandle);
+        }
+        LOG.info("Open url");
+        driver1.get(AppConfig.getStartUrl());
+        waitForPageLoaded1();
+        LOG.info("Click SignIn button");
+        driver1.findElement(By.className("btn--pink")).click();
+        Thread.sleep(1000);
+        LOG.info("Enter login");
+        driver1.findElement(By.id("email-field")).sendKeys("3@3.com");
+        LOG.info("Enter password");
+        driver1.findElement(By.id("pass-field")).sendKeys("333333");
+        LOG.info("Click Login button");
+        driver1.findElement(By.id("sign_in")).click();
+        Thread.sleep(1000);
+        LOG.info("Scroll to live card position");
+        ((JavascriptExecutor)driver1).executeScript("window.scrollBy(" + 60 + ","
+                + 631 + ");");
+        Thread.sleep(500);
+        driver.findElement(By.partialLinkText("TestStream")).click();
+        LOG.info("Click on Live video created before");
+        driver1.findElement(By.className("card__inner")).click();
+        Thread.sleep(20000);
+        LOG.info("Check that video displayed for subscriber");
+        Assert.assertEquals(driver1.findElement(By.className("video-stat__item")).getText(),"2");
+        WebDriver driver2 = new ChromeDriver();
+        driver2.manage().window().maximize();
+        for (String winHandle:driver2.getWindowHandles()) {
+            driver2.switchTo().window(winHandle);
+        }
+        LOG.info("Open url");
+        driver2.get(AppConfig.getStartUrl());
+        waitForPageLoaded1();
+        LOG.info("Click SignIn button");
+        driver2.findElement(By.className("btn--pink")).click();
+        Thread.sleep(1000);
+        LOG.info("Enter login");
+        driver2.findElement(By.id("email-field")).sendKeys("4@4.com");
+        LOG.info("Enter password");
+        driver2.findElement(By.id("pass-field")).sendKeys("444444");
+        LOG.info("Click Login button");
+        driver2.findElement(By.id("sign_in")).click();
+        Thread.sleep(1000);
+        LOG.info("Scroll to live card position");
+        ((JavascriptExecutor)driver2).executeScript("window.scrollBy(" + 60 + ","
+                + 631 + ");");
+        Thread.sleep(500);
+        driver.findElement(By.partialLinkText("TestStream")).click();
+        LOG.info("Click on Live video created before");
+        driver2.findElement(By.className("card__inner")).click();
+        Thread.sleep(20000);
+        LOG.info("Check that video displayed for subscriber");
+        Assert.assertEquals(driver2.findElement(By.className("video-stat__item")).getText(),"3");
+        /*WebDriver driver3 = new ChromeDriver();
+        driver3.manage().window().maximize();
+        for (String winHandle:driver3.getWindowHandles()) {
+            driver3.switchTo().window(winHandle);
+        }
+        LOG.info("Open url");
+        driver3.get(AppConfig.getStartUrl());
+        waitForPageLoaded1();
+        LOG.info("Click SignIn button");
+        driver3.findElement(By.className("btn--pink")).click();
+        Thread.sleep(1000);
+        LOG.info("Enter login");
+        driver3.findElement(By.id("email-field")).sendKeys("5@5.com");
+        LOG.info("Enter password");
+        driver3.findElement(By.id("pass-field")).sendKeys("555555");
+        LOG.info("Click Login button");
+        driver3.findElement(By.id("sign_in")).click();
+        Thread.sleep(1000);
+        LOG.info("Scroll to live card position");
+        ((JavascriptExecutor)driver3).executeScript("window.scrollBy(" + 60 + ","
+                + 631 + ");");
+        Thread.sleep(500);
+        LOG.info("Click on Live video created before");
+        driver3.findElement(By.className("card__inner")).click();
+        Thread.sleep(20000);
+        LOG.info("Check that video displayed for subscriber");
+        Assert.assertEquals(driver3.findElement(By.className("video-stat__item")).getText(),"4");
+        WebDriver driver4 = new ChromeDriver();
+        driver4.manage().window().maximize();
+        for (String winHandle:driver4.getWindowHandles()) {
+            driver4.switchTo().window(winHandle);
+        }
+        LOG.info("Open url");
+        driver4.get(AppConfig.getStartUrl());
+        waitForPageLoaded1();
+        LOG.info("Click SignIn button");
+        driver4.findElement(By.className("btn--pink")).click();
+        Thread.sleep(1000);
+        LOG.info("Enter login");
+        driver4.findElement(By.id("email-field")).sendKeys("6@6.com");
+        LOG.info("Enter password");
+        driver4.findElement(By.id("pass-field")).sendKeys("666666");
+        LOG.info("Click Login button");
+        driver4.findElement(By.id("sign_in")).click();
+        Thread.sleep(1000);
+        LOG.info("Scroll to live card position");
+        ((JavascriptExecutor)driver4).executeScript("window.scrollBy(" + 60 + ","
+                + 631 + ");");
+        Thread.sleep(500);
+        LOG.info("Click on Live video created before");
+        driver4.findElement(By.className("card__inner")).click();
+        Thread.sleep(20000);
+        LOG.info("Check that video displayed for subscriber");
+        Assert.assertEquals(driver4.findElement(By.className("video-stat__item")).getText(),"5");*/
+        driver.close();
+        driver1.close();
+        driver2.close();
+        webDriver.switchTo().window(winHandleBefore);
+        LOG.info("Click Stop Live Button");
+        webDriver.findElement(loginElements.getPublisherStopButton()).click();
+        LOG.info("Accept Broadcast Stop");
+        webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/div/div/div/button[2]")).click();
+        Thread.sleep(1000);
+        LOG.info("Check that broadcast ended");
+        Assert.assertEquals(webDriver.findElement(By.className("stats__value")).getText(),"3");
+    }
+
 
     @Test
     public void mandatoryGiftsTest() throws InterruptedException {
@@ -281,8 +448,8 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         webDriver.findElement(By.id("nickname-field")).sendKeys("testNickName" + d.getMinutes() + d.getSeconds() + d.getHours());
         webDriver.findElement(By.id("info-field")).sendKeys("testUserInfo");
         webDriver.findElement(By.className("btn--pink")).click();
-        webDriver.findElement(By.xpath("/html/body/div[2]/div[1]/main/div/div[1]/ul/li[3]"));
-        webDriver.findElement(By.xpath("//*[@id=\"personal-info\"]/div/form")).click();
+        Assert.assertEquals(webDriver.findElement(By.id("info-field")).getAttribute("value"),"testUserInfo");
+
 
 
     }
