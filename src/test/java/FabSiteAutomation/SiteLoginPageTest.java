@@ -325,7 +325,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
 
         LOG.info("Click on Live video created before");
         driver2.findElement(By.partialLinkText("TestStream")).click();
-        Thread.sleep(200000);
+        Thread.sleep(800000);
         LOG.info("Check that video displayed for subscriber");
         Assert.assertEquals(driver2.findElement(By.className("video-stat__item")).getText(),"3");
         /*WebDriver driver3 = new ChromeDriver();
