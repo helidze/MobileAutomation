@@ -230,7 +230,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         haltSessions();
     }
 
-    /*@Test(priority = 19)
+    @Test(priority = 19)
     public void viewStreamBy5Subscribers() throws InterruptedException {
         loginIntoApp();
         Thread.sleep(2500);
@@ -342,7 +342,6 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         Assert.assertEquals(webDriver.findElement(By.className("stats__value")).getText(),"3");
         haltSessions();
     }
-*/
 
     @Test(priority = 14)
     public void mandatoryGiftsTest() throws InterruptedException {
