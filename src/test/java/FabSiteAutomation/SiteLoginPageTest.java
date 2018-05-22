@@ -328,60 +328,6 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         Thread.sleep(800000);
         LOG.info("Check that video displayed for subscriber");
         Assert.assertEquals(driver2.findElement(By.className("video-stat__item")).getText(),"3");
-        /*WebDriver driver3 = new ChromeDriver();
-        driver3.manage().window().maximize();
-        for (String winHandle:driver3.getWindowHandles()) {
-            driver3.switchTo().window(winHandle);
-        }
-        LOG.info("Open url");
-        driver3.get(AppConfig.getStartUrl());
-        waitForPageLoaded1();
-        LOG.info("Click SignIn button");
-        driver3.findElement(By.className("btn--pink")).click();
-        Thread.sleep(1000);
-        LOG.info("Enter login");
-        driver3.findElement(By.id("email-field")).sendKeys("5@5.com");
-        LOG.info("Enter password");
-        driver3.findElement(By.id("pass-field")).sendKeys("555555");
-        LOG.info("Click Login button");
-        driver3.findElement(By.id("sign_in")).click();
-        Thread.sleep(1000);
-        LOG.info("Scroll to live card position");
-        ((JavascriptExecutor)driver3).executeScript("window.scrollBy(" + 60 + ","
-                + 631 + ");");
-        Thread.sleep(500);
-        LOG.info("Click on Live video created before");
-        driver3.findElement(By.className("card__inner")).click();
-        Thread.sleep(20000);
-        LOG.info("Check that video displayed for subscriber");
-        Assert.assertEquals(driver3.findElement(By.className("video-stat__item")).getText(),"4");
-        WebDriver driver4 = new ChromeDriver();
-        driver4.manage().window().maximize();
-        for (String winHandle:driver4.getWindowHandles()) {
-            driver4.switchTo().window(winHandle);
-        }
-        LOG.info("Open url");
-        driver4.get(AppConfig.getStartUrl());
-        waitForPageLoaded1();
-        LOG.info("Click SignIn button");
-        driver4.findElement(By.className("btn--pink")).click();
-        Thread.sleep(1000);
-        LOG.info("Enter login");
-        driver4.findElement(By.id("email-field")).sendKeys("6@6.com");
-        LOG.info("Enter password");
-        driver4.findElement(By.id("pass-field")).sendKeys("666666");
-        LOG.info("Click Login button");
-        driver4.findElement(By.id("sign_in")).click();
-        Thread.sleep(1000);
-        LOG.info("Scroll to live card position");
-        ((JavascriptExecutor)driver4).executeScript("window.scrollBy(" + 60 + ","
-                + 631 + ");");
-        Thread.sleep(500);
-        LOG.info("Click on Live video created before");
-        driver4.findElement(By.className("card__inner")).click();
-        Thread.sleep(20000);
-        LOG.info("Check that video displayed for subscriber");
-        Assert.assertEquals(driver4.findElement(By.className("video-stat__item")).getText(),"5");*/
         driver.close();
         driver1.close();
         driver2.close();
@@ -468,6 +414,60 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         webDriver.findElement(By.className("btn--pink")).click();
         LOG.info("Check that UserInfoCorrect");
         Assert.assertEquals(webDriver.findElement(By.id("info-field")).getAttribute("value"),"testUserInfo");
+        haltSessions();
+    }
+
+    @Test(priority = 20)
+    public void changeProfilePasswordTest() throws InterruptedException {
+        loginIntoApp();
+        Thread.sleep(2500);
+        LOG.info("Click on avatar button");
+        webDriver.findElement(By.xpath("//*[@id=\"account_menu\"]")).click();
+        Thread.sleep(500);
+        LOG.info("Click edit profile");
+        webDriver.findElement(By.id("edit_profile")).click();
+        Thread.sleep(1500);
+        LOG.info("Scroll to the bottom of the page");
+        ((JavascriptExecutor) webDriver).executeScript(
+                "arguments[0].scrollIntoView();", webDriver.findElement(By.id("old-pass-field")));
+        webDriver.findElement(By.id("old-pass-field")).click();
+        LOG.info("Enter old password");
+        webDriver.findElement(By.id("old-pass-field")).sendKeys("111111");
+        LOG.info("Enter new password");
+        webDriver.findElement(By.id("new-pass-field")).sendKeys("222222");
+        LOG.info("Confirm new password");
+        webDriver.findElement(By.id("confirm-pass-field")).sendKeys("222222");
+        LOG.info("Click save");
+        webDriver.findElement(By.className("btn--pink")).click();
+        Thread.sleep(1500);
+        LOG.info("Click on avatar");
+        webDriver.findElement(By.xpath("//*[@id=\"account_menu\"]")).click();
+        LOG.info("Click Log Out");
+        webDriver.findElement(By.id("log_out")).click();
+        Thread.sleep(500);
+        loginIntoAppWithChangedPassword();
+        Thread.sleep(2500);
+        LOG.info("Click on avatar button");
+        webDriver.findElement(By.xpath("//*[@id=\"account_menu\"]")).click();
+        Thread.sleep(500);
+        LOG.info("Click edit profile");
+        webDriver.findElement(By.id("edit_profile")).click();
+        Thread.sleep(1500);
+        LOG.info("Scroll to the bottom of the page");
+        ((JavascriptExecutor) webDriver).executeScript(
+                "arguments[0].scrollIntoView();", webDriver.findElement(By.id("old-pass-field")));
+        webDriver.findElement(By.id("old-pass-field")).click();
+        LOG.info("Enter old password");
+        webDriver.findElement(By.id("old-pass-field")).sendKeys("222222");
+        LOG.info("Enter new password");
+        webDriver.findElement(By.id("new-pass-field")).sendKeys("111111");
+        LOG.info("Confirm new password");
+        webDriver.findElement(By.id("confirm-pass-field")).sendKeys("111111");
+        LOG.info("Click save");
+        webDriver.findElement(By.className("btn--pink")).click();
+        LOG.info("Check that password changed correct");
+        Assert.assertEquals(webDriver.findElement(By.className("alert--success")).getText(),"Password successfully updated");
+
         haltSessions();
     }
 

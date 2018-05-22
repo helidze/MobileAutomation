@@ -156,6 +156,19 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
 
     }
 
+    public void loginIntoAppWithChangedPassword(){
+        LOG.info("Click SignIn button");
+        waitForElementDisplayed(By.className("btn--pink"));
+        webDriver.findElement(By.className("btn--pink")).click();
+        LOG.info("Enter login");
+        webDriver.findElement(By.id("email-field")).sendKeys("1@1.com");
+        LOG.info("Enter password");
+        webDriver.findElement(By.id("pass-field")).sendKeys("222222");
+        LOG.info("Click Login button");
+        webDriver.findElement(By.id("sign_in")).click();
+
+    }
+
     public void loginIntoAppWithEmptyLogin(){
         LOG.info("Open url");
         webDriver.get(AppConfig.getStartUrl());
