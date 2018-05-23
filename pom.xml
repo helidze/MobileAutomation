@@ -351,10 +351,10 @@
         <profile>
             <id>Default Agent</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <skip.tests>false</skip.tests>
+                <skip.tests>true</skip.tests>
                 <suite.Name>target/test-classes/testSuiteXml/suites/Default Agent.xml</suite.Name>
             </properties>
         </profile>
