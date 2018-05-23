@@ -17,6 +17,24 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
 
+    <repositories>
+    <repository>
+        <id>atlassian</id>
+        <url>https://maven.atlassian.com/repository/public</url>
+    </repository>
+    <repository>
+        <id>consol-labs-release</id>
+        <url>http://labs.consol.de/maven/repository/</url>
+    </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>atlassian</id>
+            <url>https://maven.atlassian.com/repository/public</url>
+        </pluginRepository>
+    </pluginRepositories>
+
   <dependencyManagement>
     <dependencies>
       <!-- Camel BOM -->
@@ -316,27 +334,63 @@
       </dependency>
   </dependencies>
 
+
+    <profiles>
+        <profile>
+            <id>all_Tests</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <skip.tests>true</skip.tests>
+                <suite.Name>target/test-classes/testSuiteXml/all_Tests.xml</suite.Name>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>Default Agent</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <skip.tests>false</skip.tests>
+                <suite.Name>target/test-classes/testSuiteXml/suites/Default Agent.xml</suite.Name>
+            </properties>
+        </profile>
+    </profiles>
+
   <build>
-    <defaultGoal>install</defaultGoal>
-
-     <!-- <pluginManagement>
-          <plugins>
-              <plugin>
-                  <groupId>org.apache.maven.plugins</groupId>
-                  <artifactId>maven-surefire-plugin</artifactId>
-                  <version>2.21.0</version>
-
-              </plugin>
-
-          </plugins>
-      </pluginManagement>-->
-
     <plugins>
 
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
             <version>2.21.0</version>
+            <configuration>
+                <runOrder>filesystem</runOrder>
+                <threadCount>3</threadCount>
+                <parallel>suites</parallel>
+                <skipTests>${skip.tests}</skipTests>
+                <argLine>-Xms512m -Xmx2058m</argLine>
+                <suiteXmlFiles>
+                    <suiteXmlFile>${suite.Name}</suiteXmlFile>
+                </suiteXmlFiles>
+                <systemPropertyVariables>
+                    <org.uncommons.reportng.escape-output>false</org.uncommons.reportng.escape-output>
+                </systemPropertyVariables>
+                <properties>
+                    <property>
+                        <name>usedefaultlisteners</name>
+                        <value>false</value>
+                    </property>
+                    <property>
+                        <name>listener</name>
+                        <value>
+                            pageObjPattern.tests.TestsAnalyser,pageObjPattern.tests.PlatformSuite,org.uncommons.reportng.HTMLReporter,org.uncommons.reportng.JUnitXMLReporter
+                        </value>
+                    </property>
+                </properties>
+            </configuration>
         </plugin>
 
       <plugin>
@@ -369,6 +423,8 @@
       </plugin>
 
     </plugins>
+      <directory>target</directory>
+      <finalName>${project.artifactId}-${project.version}</finalName>
   </build>
 
 </project>
