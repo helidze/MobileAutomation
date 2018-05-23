@@ -379,18 +379,18 @@
                 <systemPropertyVariables>
                     <org.uncommons.reportng.escape-output>false</org.uncommons.reportng.escape-output>
                 </systemPropertyVariables>
-                <properties>
-                    <property>
+               <!-- <properties>
+                    &lt;!&ndash;<property>
                         <name>usedefaultlisteners</name>
                         <value>false</value>
-                    </property>
+                    </property>&ndash;&gt;
                     <property>
                         <name>listener</name>
                         <value>
                             pageObjPattern.tests.TestsAnalyser,pageObjPattern.tests.PlatformSuite,org.uncommons.reportng.HTMLReporter,org.uncommons.reportng.JUnitXMLReporter
                         </value>
                     </property>
-                </properties>
+                </properties>-->
             </configuration>
         </plugin>
 
