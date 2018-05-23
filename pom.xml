@@ -103,11 +103,12 @@
       <scope>test</scope>
     </dependency>
 
-    <dependency>
-      <groupId>org.testng</groupId>
-      <artifactId>testng</artifactId>
-      <version>6.11</version>
-    </dependency>
+      <dependency>
+          <groupId>org.testng</groupId>
+          <artifactId>testng</artifactId>
+          <version>6.14.3</version>
+          <scope>test</scope>
+      </dependency>
 
       <dependency>
           <groupId>log4j</groupId>
@@ -384,7 +385,7 @@
                         <value>false</value>
                     </property>
                     <property>
-                        <!--<name>listener</name>-->
+                        <name>listener</name>
                         <value>
                             pageObjPattern.tests.TestsAnalyser,pageObjPattern.tests.PlatformSuite,org.uncommons.reportng.HTMLReporter,org.uncommons.reportng.JUnitXMLReporter
                         </value>
