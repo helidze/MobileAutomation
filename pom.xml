@@ -367,7 +367,7 @@
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
             <version>2.21.0</version>
-            <configuration>
+            <!--<configuration>
                 <runOrder>filesystem</runOrder>
                 <threadCount>1</threadCount>
                 <parallel>suites</parallel>
@@ -379,7 +379,7 @@
                 <systemPropertyVariables>
                     <org.uncommons.reportng.escape-output>false</org.uncommons.reportng.escape-output>
                 </systemPropertyVariables>
-               <!-- <properties>
+               &lt;!&ndash; <properties>
                     &lt;!&ndash;<property>
                         <name>usedefaultlisteners</name>
                         <value>false</value>
@@ -390,8 +390,8 @@
                             pageObjPattern.tests.TestsAnalyser,pageObjPattern.tests.PlatformSuite,org.uncommons.reportng.HTMLReporter,org.uncommons.reportng.JUnitXMLReporter
                         </value>
                     </property>
-                </properties>-->
-            </configuration>
+                </properties>&ndash;&gt;
+            </configuration>-->
         </plugin>
 
       <plugin>
