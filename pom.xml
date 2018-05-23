@@ -342,7 +342,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <skip.tests>true</skip.tests>
+                <skip.tests>false</skip.tests>
                 <suite.Name>target/test-classes/testSuiteXml/all_Tests.xml</suite.Name>
             </properties>
         </profile>
@@ -350,7 +350,7 @@
         <profile>
             <id>Default Agent</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
                 <skip.tests>false</skip.tests>
