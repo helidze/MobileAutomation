@@ -160,7 +160,7 @@ public abstract class FileManager {
         return content;
     }
 
-    /*public static List<String> parseLocalFileToList(String fileName, Integer... waitForFileInSec) {
+    public static List<String> parseLocalFileToList(String fileName, Integer... waitForFileInSec) {
         List<String> result = new ArrayList<>();
         URL url = FileManager.class.getClassLoader().getResource(fileName);
         String filePath = AppUtil.getRelativePathToImageWithClass(url);
@@ -182,7 +182,7 @@ public abstract class FileManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 
     /*public static List<String> getExcelData(String filePath) {
         File f = new File(filePath);

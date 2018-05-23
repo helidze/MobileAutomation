@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Full Regression (Suite 1)" parallel="tests" thread-count="1">
+
+    <test verbose="3" name="PDF, Questions and Surveys, Reports" parallel="classes" thread-count="1">
+        <classes>
+            <class name="FabSiteAutomation.SiteLoginPageTest"/>
+        </classes>
+    </test>
+
+
+</suite>

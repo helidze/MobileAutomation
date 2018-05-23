@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="WorldApp acceptance 1" verbose="1">
+    <listeners>
+        <listener class-name="pageObjPattern.tests.TestsAnalyser"/>
+        <listener class-name="pageObjPattern.tests.PlatformSuite"/>
+        <listener class-name="org.uncommons.reportng.HTMLReporter"/>
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+    </listeners>
+    <suite-files>
+        <suite-file path="suites/Default Agent.xml"/>
+    </suite-files>
+</suite>
