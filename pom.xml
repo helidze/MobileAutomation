@@ -339,7 +339,7 @@
         <profile>
             <id>all_Tests</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
                 <skip.tests>true</skip.tests>
@@ -368,7 +368,7 @@
             <version>2.21.0</version>
             <configuration>
                 <runOrder>filesystem</runOrder>
-                <threadCount>3</threadCount>
+                <threadCount>1</threadCount>
                 <parallel>suites</parallel>
                 <skipTests>${skip.tests}</skipTests>
                 <argLine>-Xms512m -Xmx2058m</argLine>
