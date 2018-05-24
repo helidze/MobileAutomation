@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Fabulive" verbose="1">
     <listeners>
-        <listener class-name="pageObjPattern.tests.CustomLogging"/>
+        <!--<listener class-name="pageObjPattern.tests.CustomLogging"/>-->
         <!--<listener class-name="pageObjPattern.tests.CustomReporter"/>
         <listener class-name="org.uncommons.reportng.HTMLReporter"/>-->
     </listeners>
