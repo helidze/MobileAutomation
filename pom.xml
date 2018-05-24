@@ -361,7 +361,7 @@
             </activation>
             <properties>
                 <skip.tests>true</skip.tests>
-                <suite.Name>target/test-classes/testSuiteXml/suites/Default Agent.xml</suite.Name>
+                <suite.Name>target/test-classes/testSuiteXml/suites/DefaultAgent.xml</suite.Name>
             </properties>
         </profile>
 

@@ -8,6 +8,6 @@
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
     </listeners>
     <suite-files>
-        <suite-file path="suites/Default Agent.xml"/>
+        <suite-file path="suites/DefaultAgent.xml"/>
     </suite-files>
 </suite>
