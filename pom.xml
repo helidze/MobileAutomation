@@ -342,7 +342,7 @@
   </dependencies>
 
 
-    <profiles>
+    <!--<profiles>
         <profile>
             <id>all_Tests</id>
             <activation>
@@ -375,7 +375,7 @@
                 <suite.Name>target/test-classes/testSuiteXml/suites/newTest.xml</suite.Name>
             </properties>
         </profile>
-    </profiles>
+    </profiles>-->
 
   <build>
     <plugins>
