@@ -1,7 +1,7 @@
 /*
 package pageObjPattern.pages.appPages.forms;
 
-import org.apache.log4j.Logger;
+import org.apache.log4j.CustomLogging;
 import pageObjPattern.pages.appPages.elements.forms.MobileVotingElements;
 
 import utils.SysUtils;
@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 public class MobileVotingPage  {
 
-    private static Logger LOG = Logger.getLogger(MobileVotingPage.class);
+    private static CustomLogging LOG = CustomLogging.getLogger(MobileVotingPage.class);
 
     private MobileVotingElements votingElements;
     private MobileDriver mobileDriver;

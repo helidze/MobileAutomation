@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Fabulive" verbose="1">
+    <listeners>
+        <listener class-name="pageObjPattern.tests.CustomLogging"/>
+        <!--<listener class-name="pageObjPattern.tests.CustomReporter"/>
+        <listener class-name="org.uncommons.reportng.HTMLReporter"/>-->
+    </listeners>
+    <test name="All tests">
+        <classes>
+            <class name="FabSiteAutomation.SiteLoginPageTest"></class>
+        </classes>
+    </test>
+</suite>

@@ -1,14 +1,14 @@
 /*
 package pageObjPattern.pages.appPages.forms;
 
-import org.apache.log4j.Logger;
+import org.apache.log4j.CustomLogging;
 import pageObjPattern.pages.appPages.elements.forms.MobileViewElements;
 import pageObjPattern.pages.offline.OfflineViewPage;
 import utils.mobile.MobileDriver;
 
 public class MobileViewPage extends OfflineViewPage {
 
-    private static Logger LOG = Logger.getLogger(MobileViewPage.class);
+    private static CustomLogging LOG = CustomLogging.getLogger(MobileViewPage.class);
 
     */
 /*private MobileViewElements viewElements;

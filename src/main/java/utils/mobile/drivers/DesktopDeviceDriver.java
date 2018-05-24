@@ -2,7 +2,7 @@
 package utils.mobile.drivers;
 
 import config.AppConfig;
-import org.apache.log4j.Logger;
+import org.apache.log4j.CustomLogging;
 import org.openqa.selenium.By;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
@@ -34,7 +34,7 @@ import java.util.List;
 
 public class DesktopDeviceDriver extends MobileDriver {
 
-    private static Logger LOG = Logger.getLogger(DesktopDeviceDriver.class);
+    private static CustomLogging LOG = CustomLogging.getLogger(DesktopDeviceDriver.class);
     private static final String CHROME_DRIVER_FILE_NAME = "chromedriver.exe";
     private static final String CHROME_DRIVER_FOLDER = "chrome_profile";
     private static final String EXECUTION_FILE = "runWinDesktop.bat";

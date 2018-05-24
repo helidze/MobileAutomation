@@ -1,7 +1,7 @@
 /*
 package pageObjPattern.pages.appPages.forms;
 
-import org.apache.log4j.Logger;
+import org.apache.log4j.CustomLogging;
 import pageObjPattern.pages.appPages.MobileLoginPage;
 import pageObjPattern.pages.appPages.elements.forms.MobileFormsElements;
 import pageObjPattern.pages.appPages.tasks.MobileTasksPage;
@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 public class MobileFormsPage extends OfflineFormsPage {
 
-    private static final Logger LOG = Logger.getLogger(MobileFormsPage.class);
+    private static final CustomLogging LOG = CustomLogging.getLogger(MobileFormsPage.class);
     private MobileFormsElements formsElements;
     private MobileDriver mobileDriver;
 

@@ -333,10 +333,16 @@
               </exclusion>
           </exclusions>
       </dependency>
+
+      <dependency>
+          <groupId>com.google.inject</groupId>
+          <artifactId>guice</artifactId>
+          <version>4.0</version>
+      </dependency>
   </dependencies>
 
 
-<!--    <profiles>
+    <profiles>
         <profile>
             <id>all_Tests</id>
             <activation>
@@ -358,7 +364,18 @@
                 <suite.Name>target/test-classes/testSuiteXml/suites/Default Agent.xml</suite.Name>
             </properties>
         </profile>
-    </profiles>-->
+
+    <profile>
+            <id>TestTest</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <skip.tests>true</skip.tests>
+                <suite.Name>target/test-classes/testSuiteXml/suites/newTest.xml</suite.Name>
+            </properties>
+        </profile>
+    </profiles>
 
   <build>
     <plugins>
