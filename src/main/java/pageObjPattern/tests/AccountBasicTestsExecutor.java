@@ -153,6 +153,7 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
         webDriver.findElement(By.id("pass-field")).sendKeys("111111");
         LOG.info("Click Login button");
         webDriver.findElement(By.id("sign_in")).click();
+        waitForPageLoaded1();
 
     }
 
@@ -276,7 +277,7 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
         LOG.info("Click Delete button");
         webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/main/div/div/div[1]/div[2]/div/ul/li/button")).click();
         LOG.info("Accept deletion");
-        webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/div/div/div/button[2]")).click();
+        webDriver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div[2]/span/div/div/button[2]")).click();
     }
 
     public void removeVideoFileFromProfilePage()throws InterruptedException{
@@ -286,11 +287,11 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
         webDriver.findElement(By.xpath("//*[@id=\"user_link\"]")).click();
         Thread.sleep(1000);
         LOG.info("Click on video menu button");
-        webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/main/div/div/div[2]/section[2]/ul/li/div/article/div[2]/button")).click();
+        webDriver.findElement(By.xpath("//*[@id=\"id_1\"]/button")).click();
         LOG.info("Click Delete button");
-        webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/main/div/div/div[2]/section[2]/ul/li/div/article/div[2]/ul/li/button")).click();
+        webDriver.findElement(By.xpath("//*[@id=\"id_1\"]/ul/li/button")).click();
         LOG.info("Accept deletion");
-        webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/div/div/div/button[2]")).click();
+        webDriver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div[2]/span/div/div/button[2]")).click();
     }
 
     public void createAndCloseStream()throws InterruptedException{
@@ -311,12 +312,12 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
         LOG.info("Click Stop Live Button");
         webDriver.findElement(loginElements.getPublisherStopButton()).click();
         LOG.info("Accept Broadcast Stop");
-        webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/div/div/div/button[2]")).click();
+        webDriver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div[2]/span/div/div/button[2]")).click();
     }
 
     protected List<String> getCurrentFollowers(){
         List<String> currentFollowers = new ArrayList<>();
-        List<WebElement> matches = webDriver.findElements(By.className("username__name"));
+        List<WebElement> matches = webDriver.findElements(By.className("user-card__fullname"));
         for (WebElement match : matches) {
             currentFollowers.add(match.getText());
         }
@@ -334,7 +335,7 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
 
     protected List<String> getCurrentPopularVideos(){
         List<String> currentPopularVideos = new ArrayList<>();
-        List<WebElement> matches = webDriver.findElements(By.className("card"));
+        List<WebElement> matches = webDriver.findElements(By.className("card__link"));
         for (WebElement match : matches) {
             currentPopularVideos.add(match.getText());
         }

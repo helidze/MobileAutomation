@@ -1,27 +1,20 @@
 package FabSiteAutomation;
 
 
-import com.google.common.base.Verify;
 import config.AppConfig;
 import org.apache.log4j.Logger;
-import org.junit.experimental.theories.Theories;
 import org.openqa.selenium.*;
 
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.internal.Locatable;
 import org.testng.Assert;
-import org.testng.ITestResult;
 import org.testng.annotations.*;
 import pageObjPattern.basePage.MainPage;
 
 import pageObjPattern.tests.AccountBasicTestsExecutor;
 
-import java.lang.reflect.Method;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
@@ -51,7 +44,10 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
     public void positiveLoginTest() {
         loginIntoApp();
         LOG.info("Check that user logged in");
-        Assert.assertEquals(webDriver.findElement(By.className("userblock__username")).getText(), "NameNewName");
+        waitForElementBeDisplayed(webDriver,By.id("account_menu"));
+        webDriver.findElement(By.id("account_menu")).click();
+        Assert.assertEquals(webDriver.findElement(By.id("user_link")).getText(), "NameNewName\n" +
+                "@newusername");
 
     }
 
@@ -109,7 +105,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         removeVideoFileFromVideoView();
         Thread.sleep(2500);
         LOG.info("Check that video file doesn't exist");
-        Assert.assertTrue(!webDriver.getPageSource().contains("/html/body/div[1]/div[1]/main/div/div/div[2]/section[2]/ul/li/div/article/div[4]/footer"));
+        Assert.assertTrue(!webDriver.getPageSource().contains("videoplaybackVideo"));
 
     }
 
@@ -122,7 +118,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         removeVideoFileFromProfilePage();
         Thread.sleep(2500);
         LOG.info("Check that video file doesn't exist");
-        Assert.assertTrue(!webDriver.getPageSource().contains("/html/body/div[1]/div[1]/main/div/div/div[2]/section[2]/ul/li/div/article/div[4]/footer"));
+        Assert.assertTrue(!webDriver.getPageSource().contains("videoplaybackVideo"));
 
     }
 
@@ -138,7 +134,10 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
     public void facebookLoginTest(){
         loginIntoAppByFacebook();
         LOG.info("Check that user logged in");
-        Assert.assertEquals(webDriver.findElement(loginElements.getUserBlockName()).getText(), "Ace TestBase");
+        waitForElementBeDisplayed(webDriver,By.id("account_menu"));
+        webDriver.findElement(By.id("account_menu")).click();
+        Assert.assertEquals(webDriver.findElement(loginElements.getUserBlockName()).getText(), "Ace TestBase\n" +
+                "@acetestbase");
 
     }
 
@@ -149,7 +148,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         createAndCloseStream();
         Thread.sleep(1000);
         LOG.info("Check that broadcast ended");
-        Assert.assertEquals(webDriver.findElement(By.className("details__title")).getText(),"Broadcast ended");
+        Assert.assertEquals(webDriver.findElement(By.className("details__p")).getText(),"Broadcast ended");
 
     }
 
@@ -160,7 +159,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         webDriver.findElement(loginElements.getSearchField()).sendKeys("a");
         ((ChromeDriver) webDriver).getKeyboard().pressKey(Keys.ENTER);
         Thread.sleep(500);
-        Assert.assertEquals(getCurrentFollowers().get(0),"Admin");
+        Assert.assertEquals(getCurrentFollowers().get(0),"admin");
 
     }
 
@@ -169,7 +168,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         createNewUser();
         Thread.sleep(1500);
         LOG.info("Check that user created");
-        Assert.assertTrue(webDriver.findElement(By.className("avatar__inner")).isDisplayed());
+        Assert.assertTrue(webDriver.findElement(By.className("avatar__first-letter")).isDisplayed());
 
     }
 
@@ -346,15 +345,16 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
     public void mandatoryGiftsTest() throws InterruptedException {
         loginIntoApp();
         Thread.sleep(1500);
-        webDriver.findElement(By.id("gifts")).click();
+        webDriver.findElement(By.xpath("//*[@id=\"coins\"]/a/span[2]")).click();
         Thread.sleep(4000);
         LOG.info("Add main gifts to list");
         ArrayList<String> expectedGifts = new ArrayList<>();
-        expectedGifts.add("Extra Small Package (2 Gifts)");
-        expectedGifts.add("Small Package (6 Gifts)");
-        expectedGifts.add("Medium Package (12 Gifts)");
-        expectedGifts.add("Big Package (60 Gifts)");
-        expectedGifts.add("Huge Package (99 Gifts)");
+        expectedGifts.add("69");
+        expectedGifts.add("366");
+        expectedGifts.add("819");
+        expectedGifts.add("1899");
+        expectedGifts.add("3899");
+        expectedGifts.add("5399");
         LOG.info("Check that all gifts is exist on site");
         Assert.assertTrue(getCurrentGifts().containsAll(expectedGifts));
 
@@ -383,7 +383,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         fileUpload.sendKeys(filePath);
         Thread.sleep(2500);
         LOG.info("Save Avatar");
-        webDriver.findElement(By.className("btn--pink")).click();
+        webDriver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div[2]/span/div/div/button[1]")).click();
         Thread.sleep(1500);
         LOG.info("Check that Avatar added");
         Assert.assertEquals(webDriver.findElement(By.className("alert__message")).getText(),"Avatar successfully updated");
@@ -410,7 +410,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         webDriver.findElement(By.id("nickname-field")).sendKeys("testNickName" + d.getMinutes() + d.getSeconds() + d.getHours());
         LOG.info("Change UserInfo");
         webDriver.findElement(By.id("info-field")).sendKeys("testUserInfo");
-        webDriver.findElement(By.className("btn--pink")).click();
+        webDriver.findElement(By.xpath("//*[@id=\"general-info\"]/div/form/div[4]/button[2]")).click();
         LOG.info("Check that UserInfoCorrect");
         Assert.assertEquals(webDriver.findElement(By.id("info-field")).getAttribute("value"),"testUserInfo");
     }
@@ -436,7 +436,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         LOG.info("Confirm new password");
         webDriver.findElement(By.id("confirm-pass-field")).sendKeys("222222");
         LOG.info("Click save");
-        webDriver.findElement(By.className("btn--pink")).click();
+        webDriver.findElement(By.xpath("//*[@id=\"change-password\"]/div/div/div[4]/button[2]")).click();
         Thread.sleep(1500);
         LOG.info("Click on avatar");
         webDriver.findElement(By.xpath("//*[@id=\"account_menu\"]")).click();
@@ -462,7 +462,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         LOG.info("Confirm new password");
         webDriver.findElement(By.id("confirm-pass-field")).sendKeys("111111");
         LOG.info("Click save");
-        webDriver.findElement(By.className("btn--pink")).click();
+        webDriver.findElement(By.xpath("//*[@id=\"change-password\"]/div/div/div[4]/button[2]")).click();
         LOG.info("Check that password changed correct");
         Assert.assertEquals(webDriver.findElement(By.className("alert--success")).getText(),"Password successfully updated");
 

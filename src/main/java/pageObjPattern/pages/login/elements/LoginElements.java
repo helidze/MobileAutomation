@@ -124,7 +124,7 @@ public class LoginElements {
         return By.className("popup__text");
     }
     public By getUserBlockName() {
-        return By.className("userblock__username");
+        return By.id("user_link");
     }
 
     public By getGoLiveButton() {
@@ -132,7 +132,7 @@ public class LoginElements {
     }
 
     public By getStartLiveButton() {
-        return By.xpath("/html/body/div[1]/div[1]/div/div/div/div/div[1]/form/button[1]");
+        return By.xpath("//*[@id=\"app\"]/div[1]/main/div[2]/span/div/div/div/div[1]/form/button[1]");
     }
 
     public By getPublisherFrame() {
