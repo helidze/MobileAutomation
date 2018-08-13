@@ -13,7 +13,7 @@ public class LoginElements {
     }
 
     public By getSignInButtonLobby(){
-        return By.className("btn--pink");
+        return By.className("btn--signin");
     }
 
     public By getSignInButton(){
@@ -124,7 +124,7 @@ public class LoginElements {
         return By.className("popup__text");
     }
     public By getUserBlockName() {
-        return By.id("user_link");
+        return By.className("userblock__username");
     }
 
     public By getGoLiveButton() {

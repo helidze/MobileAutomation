@@ -145,8 +145,8 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
         webDriver.get(AppConfig.getStartUrl());
         waitForPageLoaded1();
         LOG.info("Click SignIn button");
-        waitForElementDisplayed(By.className("btn--pink"));
-        webDriver.findElement(By.className("btn--pink")).click();
+        waitForElementDisplayed(By.className("btn--signin"));
+        webDriver.findElement(By.className("btn--signin")).click();
         LOG.info("Enter login");
         webDriver.findElement(By.id("email-field")).sendKeys("1@1.com");
         LOG.info("Enter password");
@@ -326,7 +326,7 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
 
     protected List<String> getCurrentGifts(){
         List<String> currentGifts = new ArrayList<>();
-        List<WebElement> matches = webDriver.findElements(By.className("package__name"));
+        List<WebElement> matches = webDriver.findElements(By.className("coins-unit__amount-new"));
         for (WebElement match : matches) {
             currentGifts.add(match.getText());
         }

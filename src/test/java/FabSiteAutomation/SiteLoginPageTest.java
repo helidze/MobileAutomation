@@ -46,8 +46,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         LOG.info("Check that user logged in");
         waitForElementBeDisplayed(webDriver,By.id("account_menu"));
         webDriver.findElement(By.id("account_menu")).click();
-        Assert.assertEquals(webDriver.findElement(By.id("user_link")).getText(), "NameNewName\n" +
-                "@newusername");
+        Assert.assertEquals(webDriver.findElement(By.className("userblock__username")).getText(), "NameNewName");
 
     }
 
@@ -136,8 +135,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         LOG.info("Check that user logged in");
         waitForElementBeDisplayed(webDriver,By.id("account_menu"));
         webDriver.findElement(By.id("account_menu")).click();
-        Assert.assertEquals(webDriver.findElement(loginElements.getUserBlockName()).getText(), "Ace TestBase\n" +
-                "@acetestbase");
+        Assert.assertEquals(webDriver.findElement(loginElements.getUserBlockName()).getText(), "Ace TestBase");
 
     }
 
@@ -345,7 +343,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
     public void mandatoryGiftsTest() throws InterruptedException {
         loginIntoApp();
         Thread.sleep(1500);
-        webDriver.findElement(By.xpath("//*[@id=\"coins\"]/a/span[2]")).click();
+        webDriver.findElement(By.id("coins")).click();
         Thread.sleep(4000);
         LOG.info("Add main gifts to list");
         ArrayList<String> expectedGifts = new ArrayList<>();
@@ -354,7 +352,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         expectedGifts.add("819");
         expectedGifts.add("1899");
         expectedGifts.add("3899");
-        expectedGifts.add("5399");
+        expectedGifts.add("8399");
         LOG.info("Check that all gifts is exist on site");
         Assert.assertTrue(getCurrentGifts().containsAll(expectedGifts));
 
