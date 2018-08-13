@@ -199,6 +199,7 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
         webDriver.get(AppConfig.getStartUrl());
         waitForPageLoaded1();
         LOG.info("Click Video button");
+        waitForElementBeDisplayed(webDriver,loginElements.getPlayVideoButton());
         webDriver.findElement(loginElements.getPlayVideoButton()).click();
         Thread.sleep(10000);
     }

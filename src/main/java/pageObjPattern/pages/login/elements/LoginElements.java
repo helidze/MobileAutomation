@@ -100,15 +100,15 @@ public class LoginElements {
     }
 
     public By getPlayVideoButton() {
-        return By.className("btn--play");
+        return By.className("btn--transparent");
     }
 
-    public By getCategories() {
-        return By.id("categories");
+    public By getSidebar() {
+        return By.id("open_sidebar");
     }
 
     public By getNailsCategory() {
-        return By.id("cat_Nails");
+        return By.id("Nails");
     }
 
     public By getCategoriesAlert() {

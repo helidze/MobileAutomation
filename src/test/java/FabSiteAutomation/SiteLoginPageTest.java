@@ -85,12 +85,15 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
     public void listOfCategoriesTest() throws InterruptedException {
         loginIntoApp();
         Thread.sleep(2500);
-        WebElement categories = webDriver.findElement(loginElements.getCategories());
+        WebElement sideBar = webDriver.findElement(loginElements.getSidebar());
         LOG.info("Open categories");
-        categories.click();
+        waitForElementBeDisplayed(webDriver,loginElements.getSidebar());
+        sideBar.click();
+        waitForElementBeDisplayed(webDriver,loginElements.getNailsCategory());
         LOG.info("Choose Nails");
         findElement((loginElements.getNailsCategory())).click();
         LOG.info("Check that broadcast in Nails category doesn't exist");
+        Thread.sleep(1000);
         Assert.assertEquals(findElement(loginElements.getCategoriesAlert()).getText(), "There are no broadcasts in this category. Please, check Home page to explore another broadcasts");
 
     }
