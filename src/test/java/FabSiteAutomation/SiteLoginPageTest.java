@@ -372,7 +372,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         createNewUser();
         Thread.sleep(1500);
         LOG.info("Click on avatar button");
-        webDriver.findElement(By.xpath("//*[@id=\"account_menu\"]")).click();
+        webDriver.findElement(By.id("account_menu")).click();
         LOG.info("Click edit profile");
         webDriver.findElement(By.id("edit_profile")).click();
         WebElement fileUpload = webDriver.findElement(By.xpath("//*[@id=\"avatar-field\"]"));
@@ -395,7 +395,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         Date d = new Date(System.currentTimeMillis());
         Thread.sleep(1500);
         LOG.info("Click on avatar button");
-        webDriver.findElement(By.xpath("//*[@id=\"account_menu\"]")).click();
+        webDriver.findElement(By.id("account_menu")).click();
         LOG.info("Click edit profile");
         webDriver.findElement(By.id("edit_profile")).click();
         LOG.info("Click on general info window");
@@ -437,14 +437,14 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         webDriver.findElement(By.xpath("//*[@id=\"change-password\"]/div/div/div[4]/button[2]")).click();
         Thread.sleep(1500);
         LOG.info("Click on avatar");
-        webDriver.findElement(By.xpath("//*[@id=\"account_menu\"]")).click();
+        webDriver.findElement(By.id("account_menu")).click();
         LOG.info("Click Log Out");
         webDriver.findElement(By.id("log_out")).click();
         Thread.sleep(500);
         loginIntoAppWithChangedPassword();
         Thread.sleep(2500);
         LOG.info("Click on avatar button");
-        webDriver.findElement(By.xpath("//*[@id=\"account_menu\"]")).click();
+        webDriver.findElement(By.id("account_menu")).click();
         Thread.sleep(500);
         LOG.info("Click edit profile");
         webDriver.findElement(By.id("edit_profile")).click();
