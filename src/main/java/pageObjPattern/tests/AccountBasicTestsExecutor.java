@@ -267,9 +267,9 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
 
     public void removeVideoFileFromVideoView()throws InterruptedException{
         LOG.info("Click on avatar button");
-        webDriver.findElement(By.xpath("//*[@id=\"account_menu\"]")).click();
+        webDriver.findElement(By.id("account_menu")).click();
         LOG.info("Open profile");
-        webDriver.findElement(By.xpath("//*[@id=\"user_link\"]")).click();
+        webDriver.findElement(By.xpath("//*[@id=\"account_menu\"]/div/div[2]/ul/li[1]")).click();
         LOG.info("Open video that was added");
         webDriver.findElement(By.partialLinkText("videoplaybackVideo")).click();
         Thread.sleep(1000);
@@ -283,9 +283,9 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
 
     public void removeVideoFileFromProfilePage()throws InterruptedException{
         LOG.info("Click on avatar button");
-        webDriver.findElement(By.xpath("//*[@id=\"account_menu\"]")).click();
+        webDriver.findElement(By.id("account_menu")).click();
         LOG.info("Open profile");
-        webDriver.findElement(By.xpath("//*[@id=\"user_link\"]")).click();
+        webDriver.findElement(By.xpath("//*[@id=\"account_menu\"]/div/div[2]/ul/li[1]")).click();
         Thread.sleep(1000);
         LOG.info("Click on video menu button");
         webDriver.findElement(By.xpath("//*[@id=\"id_1\"]/button")).click();

@@ -199,7 +199,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         driver.get(AppConfig.getStartUrl());
         waitForPageLoaded1();
         LOG.info("Click SignIn button");
-        driver.findElement(By.className("btn--pink")).click();
+        driver.findElement(By.className("btn--signin")).click();
         Thread.sleep(1000);
         LOG.info("Enter login");
         driver.findElement(By.id("email-field")).sendKeys("2@2.com");
@@ -216,7 +216,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         driver.findElement(By.partialLinkText("TestStream")).click();
         Thread.sleep(20000);
         LOG.info("Check that video displayed for subscriber");
-        Assert.assertEquals(driver.findElement(By.className("video-stat__item")).getText(),"1");
+        Assert.assertEquals(driver.findElement(By.className("video-stat__number")).getText(),"1");
         driver.close();
         webDriver.switchTo().window(winHandleBefore);
         LOG.info("Click Stop Live Button");
@@ -225,7 +225,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/div/div/div/button[2]")).click();
         Thread.sleep(1000);
         LOG.info("Check that broadcast ended");
-        Assert.assertEquals(webDriver.findElement(By.className("stats__value")).getText(),"1");
+        Assert.assertEquals(webDriver.findElement(By.className("video-stat__number")).getText(),"1");
 
     }
 
