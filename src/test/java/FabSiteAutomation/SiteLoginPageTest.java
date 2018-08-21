@@ -173,7 +173,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
 
     }
 
-    @Test(priority = 18)
+    @Test(priority = 19)
     public void viewStreamBySubscriberTest() throws InterruptedException {
         loginIntoApp();
         Thread.sleep(2500);
@@ -229,7 +229,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
 
     }
 
-    @Test(priority = 19)
+    @Test(priority = 20)
     public void viewStreamBy5Subscribers() throws InterruptedException {
         loginIntoApp();
         Thread.sleep(2500);
@@ -416,7 +416,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         Assert.assertEquals(webDriver.findElement(By.id("info-field")).getAttribute("value"),"testUserInfo");
     }
 
-    @Test(priority = 20)
+    @Test(priority = 18)
     public void changeProfilePasswordTest() throws InterruptedException {
         loginIntoApp();
         Thread.sleep(2500);
