@@ -13,7 +13,7 @@ public class LoginElements {
     }
 
     public By getSignInButtonLobby(){
-        return By.className("btn--signin");
+        return By.xpath("//*[@id=\"app\"]/div[1]/header/div[2]/ul/li[5]");
     }
 
     public By getSignInButton(){
