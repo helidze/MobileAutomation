@@ -46,7 +46,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         LOG.info("Check that user logged in");
         waitForElementBeDisplayed(webDriver,By.id("account_menu"));
         webDriver.findElement(By.id("account_menu")).click();
-        Assert.assertEquals(webDriver.findElement(By.className("userblock__username")).getText(), "NameNewName");
+        Assert.assertEquals(webDriver.findElement(By.className("profile-menu__link")).getText(), "My Profile");
 
     }
 

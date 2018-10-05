@@ -145,8 +145,8 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
         webDriver.get(AppConfig.getStartUrl());
         waitForPageLoaded1();
         LOG.info("Click SignIn button");
-        waitForElementDisplayed(By.className("btn--signin"));
-        webDriver.findElement(By.className("btn--signin")).click();
+        waitForElementDisplayed(By.xpath("//*[@id=\"app\"]/div[1]/header/div[2]/ul/li[5]"));
+        webDriver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/header/div[2]/ul/li[5]")).click();
         LOG.info("Enter login");
         webDriver.findElement(By.id("email-field")).sendKeys("1@1.com");
         LOG.info("Enter password");
@@ -159,8 +159,8 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
 
     public void loginIntoAppWithChangedPassword(){
         LOG.info("Click SignIn button");
-        waitForElementDisplayed(By.className("btn--signin"));
-        webDriver.findElement(By.className("btn--signin")).click();
+        waitForElementDisplayed(By.xpath("//*[@id=\"app\"]/div[1]/header/div[2]/ul/li[5]"));
+        webDriver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/header/div[2]/ul/li[5]")).click();
         LOG.info("Enter login");
         webDriver.findElement(By.id("email-field")).sendKeys("1@1.com");
         LOG.info("Enter password");
