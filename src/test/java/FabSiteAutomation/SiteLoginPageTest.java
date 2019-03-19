@@ -44,9 +44,10 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
     public void positiveLoginTest() {
         loginIntoApp();
         LOG.info("Check that user logged in");
-        waitForElementBeDisplayed(webDriver,By.id("account_menu"));
-        webDriver.findElement(By.id("account_menu")).click();
-        Assert.assertEquals(webDriver.findElement(By.className("profile-menu__link")).getText(), "My Profile");
+        waitForElementBeDisplayed(webDriver,loginElements.getAccountMenu());
+        webDriver.findElement(loginElements.getAccountMenu()).click();
+        Assert.assertEquals(webDriver.findElement(loginElements.getOpenProfileLink()).getText(), "My Profile");
+        Assert.assertEquals(webDriver.findElement(loginElements.getLogoutButton()).getText(), "Log Out");
 
     }
 
@@ -54,8 +55,11 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
     public void emptyFieldsLoginTest() {
         loginIntoAppWithEmptyLogin();
         LOG.info("Check that exception displayed");
-        Assert.assertEquals(webDriver.findElement(loginElements.getEmptyLoginError()).getText(), "Please, enter a valid data");
-
+        if (!webDriver.findElement(loginElements.getEmptyLoginError()).isDisplayed()) {
+            webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        } else{
+        Assert.assertEquals(webDriver.findElement(loginElements.getEmptyLoginError()).getText(), "Please fill this field.");
+        }
     }
 
     @Test(priority = 3)

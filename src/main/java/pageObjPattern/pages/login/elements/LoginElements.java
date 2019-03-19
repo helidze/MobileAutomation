@@ -8,8 +8,8 @@ public class LoginElements {
     public LoginElements() {
     }
 
-    public By getSkipButton(){
-        return By.xpath("");
+    public By getHomeProfileButton(){
+        return By.xpath("//*[@id=\"page-top\"]/header/div[1]/ul/li[5]/button/span[1]");
     }
 
     public By getSignInButtonLobby(){
@@ -20,16 +20,26 @@ public class LoginElements {
         return By.id("sign_in");
     }
 
-    public By getSkipButton2(){
-        return By.xpath("");
+    public By getContinueEmailButton(){
+        return By.xpath("//*[@id=\"page-top\"]/main/div[3]/div/div/div/div[2]/div/form/button");
     }
 
-    public By getSignUpAtTheBottom(){
-        return By.xpath("");
-    }
+
 
     public By getDisplayedVideo(){
         return By.xpath("//*[@id=\"advert-video\"]");
+    }
+
+    public By getAccountMenu(){
+        return By.id("account_menu");
+    }
+
+    public By getOpenProfileLink(){
+        return By.className("profile-menu__link");
+    }
+
+    public By getLogoutButton(){
+        return By.id("log_out");
     }
 
     public By getSignUpButton(){

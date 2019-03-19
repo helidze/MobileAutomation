@@ -135,24 +135,24 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
     }
 
 
-    public enum VotingType {
-        OFFLINE,
-        ONLINE,
-        MASTER_URL,
-    }
     public void loginIntoApp(){
         LOG.info("Open url");
         webDriver.get(AppConfig.getStartUrl());
         waitForPageLoaded1();
-        LOG.info("Click SignIn button");
-        waitForElementDisplayed(By.xpath("//*[@id=\"app\"]/div[1]/header/div[2]/ul/li[5]"));
-        webDriver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/header/div[2]/ul/li[5]")).click();
-        LOG.info("Enter login");
-        webDriver.findElement(By.id("email-field")).sendKeys("1@1.com");
+        LOG.info("Wait for Profile button");
+        waitForElementDisplayed(loginElements.getHomeProfileButton());
+        LOG.info("Click on Profile button");
+        webDriver.findElement(loginElements.getHomeProfileButton()).click();
+        LOG.info("Choose email field");
+        webDriver.findElement(loginElements.getInputLoginById()).click();
+        LOG.info("Enter email");
+        webDriver.findElement(loginElements.getInputLoginById()).sendKeys("1@1.com");
+        LOG.info("Click Continue with Email");
+        webDriver.findElement(loginElements.getContinueEmailButton()).click();
         LOG.info("Enter password");
-        webDriver.findElement(By.id("pass-field")).sendKeys("111111");
+        webDriver.findElement(loginElements.getInputPasswordById()).sendKeys("111111");
         LOG.info("Click Login button");
-        webDriver.findElement(By.id("sign_in")).click();
+        webDriver.findElement(loginElements.getSignInButton()).click();
         waitForPageLoaded1();
 
     }
@@ -174,10 +174,12 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
         LOG.info("Open url");
         webDriver.get(AppConfig.getStartUrl());
         waitForPageLoaded1();
-        LOG.info("Click SignIn button");
-        mainPage.click(loginElements.getSignInButtonLobby());
-        LOG.info("Click Login button");
-        webDriver.findElement(loginElements.getSignInButton()).click();
+        LOG.info("Wait for Profile button");
+        waitForElementDisplayed(loginElements.getHomeProfileButton());
+        LOG.info("Click on Profile button");
+        webDriver.findElement(loginElements.getHomeProfileButton()).click();
+        LOG.info("Click Continue with Email");
+        webDriver.findElement(loginElements.getContinueEmailButton()).click();
     }
 
     public void loginIntoAppWithIncorrectPass(){

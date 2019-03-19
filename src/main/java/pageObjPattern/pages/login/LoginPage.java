@@ -56,17 +56,6 @@ public class LoginPage extends BasePage {
         waitForElementDisplayed(loginElements.getLoginButtonById());
         click(loginElements.getLoginButtonById());
     }
-    public void clickSkipButton() {
-        LOG.info("CLICK Skip button.");
-        waitForElementDisplayed(loginElements.getSkipButton());
-        click(loginElements.getSkipButton());
-    }
-
-    public void clickSkipButton2() {
-        LOG.info("CLICK Skip button.");
-        waitForElementDisplayed(loginElements.getSkipButton2());
-        click(loginElements.getSkipButton2());
-    }
 
     public boolean isLoginButtonVisible() {
         return isElementDisplayed(loginElements.getInputLoginById());
