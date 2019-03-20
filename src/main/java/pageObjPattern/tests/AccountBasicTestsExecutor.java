@@ -262,49 +262,51 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
         fileUpload.sendKeys(filePath);
         Thread.sleep(2500);
         LOG.info("Choose thumbnail");
+        Thread.sleep(2500);
         WebDriverWait wait = new WebDriverWait(getWebDriver(), 20);
         Boolean element = wait.until(ExpectedConditions.textToBePresentInElementLocated(By.className("progress__label"),"Uploading 100%"));
+        Thread.sleep(2500);
         webDriver.findElement(By.id("thumb_wrap_1")).click();
         LOG.info("Add video name");
         webDriver.findElement(By.id("video_name_input")).sendKeys("VideoAutomationTest");
         LOG.info("Add video description");
         webDriver.findElement(By.id("video_description_input")).sendKeys("AutomationTestCreatedBy");
-        LOG.info("Scroll to the bottom of the page");
+        /*LOG.info("Scroll to the bottom of the page");
         ((JavascriptExecutor) webDriver).executeScript(
                 "arguments[0].scrollIntoView();", webDriver.findElement(By.id("video_save_btn")));
-        Thread.sleep(2500);
+        Thread.sleep(2500);*/
         LOG.info("Click save button");
         webDriver.findElement(By.id("video_save_btn")).click();
     }
 
     public void removeVideoFileFromVideoView()throws InterruptedException{
-        LOG.info("Click on avatar button");
-        webDriver.findElement(By.id("account_menu")).click();
+        /*LOG.info("Click on avatar button");
+        webDriver.findElement(loginElements.getAccountMenu()).click();
         LOG.info("Open profile");
-        webDriver.findElement(By.xpath("//*[@id=\"account_menu\"]/div/div[2]/ul/li[1]")).click();
+        webDriver.findElement(loginElements.getOpenProfileLink()).click();*/
         LOG.info("Open video that was added");
-        webDriver.findElement(By.partialLinkText("videoplaybackVideo")).click();
+        webDriver.findElement(By.partialLinkText("VideoAutomationTest")).click();
         Thread.sleep(1000);
         LOG.info("Click on video menu button");
-        webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/main/div/div/div[1]/div[2]/div/button")).click();
+        webDriver.findElement(By.xpath("//*[@id=\"video-page\"]/div/section/div[2]/div[1]/div[1]/div/button/span")).click();
         LOG.info("Click Delete button");
-        webDriver.findElement(By.xpath("/html/body/div[1]/div[1]/main/div/div/div[1]/div[2]/div/ul/li/button")).click();
+        webDriver.findElement(By.xpath("//*[@id=\"video-page\"]/div/section/div[2]/div[1]/div[1]/div/div/ul/li/button")).click();
         LOG.info("Accept deletion");
-        webDriver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div[2]/span/div/div/button[2]")).click();
+        webDriver.findElement(By.xpath("//*[@id=\"page-top\"]/main/div[2]/div/div/div/button[2]")).click();
     }
 
     public void removeVideoFileFromProfilePage()throws InterruptedException{
-        LOG.info("Click on avatar button");
+       /* LOG.info("Click on avatar button");
         webDriver.findElement(By.id("account_menu")).click();
         LOG.info("Open profile");
-        webDriver.findElement(By.xpath("//*[@id=\"account_menu\"]/div/div[2]/ul/li[1]")).click();
+        webDriver.findElement(By.xpath("//*[@id=\"account_menu\"]/div/div[2]/ul/li[1]")).click();*/
         Thread.sleep(1000);
         LOG.info("Click on video menu button");
-        webDriver.findElement(By.xpath("//*[@id=\"id_1\"]/button")).click();
+        webDriver.findElement(By.xpath("//*[@id=\"profile-page-top\"]/div/section/div/section[1]/ul/li[1]/article/div[2]/div[2]/div[1]/button/span")).click();
         LOG.info("Click Delete button");
-        webDriver.findElement(By.xpath("//*[@id=\"id_1\"]/ul/li/button")).click();
+        webDriver.findElement(By.xpath("//*[@id=\"profile-page-top\"]/div/section/div/section[1]/ul/li[1]/article/div[2]/div[2]/div[2]/ul/li[3]/div")).click();
         LOG.info("Accept deletion");
-        webDriver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div[2]/span/div/div/button[2]")).click();
+        webDriver.findElement(By.xpath("//*[@id=\"page-top\"]/main/div[2]/div/div/div/button[2]")).click();
     }
 
     public void createAndCloseStream()throws InterruptedException{

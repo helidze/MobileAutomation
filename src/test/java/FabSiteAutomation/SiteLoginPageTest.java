@@ -84,22 +84,22 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
 
     }*/
 
-    @Test(priority = 5)
-    public void listOfCategoriesTest() throws InterruptedException {
-        loginIntoApp();
-        Thread.sleep(2500);
-        WebElement sideBar = webDriver.findElement(loginElements.getSidebar());
-        LOG.info("Open categories");
-        waitForElementBeDisplayed(webDriver,loginElements.getSidebar());
-        sideBar.click();
-        waitForElementBeDisplayed(webDriver,loginElements.getNailsCategory());
-        LOG.info("Choose Nails");
-        findElement((loginElements.getNailsCategory())).click();
-        LOG.info("Check that broadcast in Nails category doesn't exist");
-        Thread.sleep(1000);
-        Assert.assertEquals(findElement(loginElements.getCategoriesAlert()).getText(), "There are no broadcasts in this category. Please, check Home page to explore another broadcasts");
-
-    }
+//    @Test(priority = 5)
+//    public void listOfCategoriesTest() throws InterruptedException {
+//        loginIntoApp();
+//        Thread.sleep(2500);
+//        WebElement sideBar = webDriver.findElement(loginElements.getSidebar());
+//        LOG.info("Open categories");
+//        waitForElementBeDisplayed(webDriver,loginElements.getSidebar());
+//        sideBar.click();
+//        waitForElementBeDisplayed(webDriver,loginElements.getNailsCategory());
+//        LOG.info("Choose Nails");
+//        findElement((loginElements.getNailsCategory())).click();
+//        LOG.info("Check that broadcast in Nails category doesn't exist");
+//        Thread.sleep(1000);
+//        Assert.assertEquals(findElement(loginElements.getCategoriesAlert()).getText(), "There are no broadcasts in this category. Please, check Home page to explore another broadcasts");
+//
+//    }
 
     @Test(priority = 6)
     public void checkVideoUploadAndDeleteFromVideoView() throws InterruptedException {
@@ -110,7 +110,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         removeVideoFileFromVideoView();
         Thread.sleep(2500);
         LOG.info("Check that video file doesn't exist");
-        Assert.assertTrue(!webDriver.getPageSource().contains("videoplaybackVideo"));
+        Assert.assertTrue(!webDriver.getPageSource().contains("VideoAutomationTest"));
 
     }
 
@@ -123,7 +123,7 @@ public class SiteLoginPageTest extends AccountBasicTestsExecutor {
         removeVideoFileFromProfilePage();
         Thread.sleep(2500);
         LOG.info("Check that video file doesn't exist");
-        Assert.assertTrue(!webDriver.getPageSource().contains("videoplaybackVideo"));
+        Assert.assertTrue(!webDriver.getPageSource().contains("VideoAutomationTest"));
 
     }
 
