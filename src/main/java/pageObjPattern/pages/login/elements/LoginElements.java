@@ -131,7 +131,7 @@ public class LoginElements {
 
 
     public By getIncorrectPassError() {
-        return By.className("popup__text");
+        return By.className("text-field__error");
     }
     public By getUserBlockName() {
         return By.className("userblock__username");

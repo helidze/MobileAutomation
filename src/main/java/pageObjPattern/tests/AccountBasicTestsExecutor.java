@@ -144,6 +144,7 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
         LOG.info("Click on Profile button");
         webDriver.findElement(loginElements.getHomeProfileButton()).click();
         LOG.info("Choose email field");
+        waitForElementDisplayed(loginElements.getInputLoginById());
         webDriver.findElement(loginElements.getInputLoginById()).click();
         LOG.info("Enter email");
         webDriver.findElement(loginElements.getInputLoginById()).sendKeys("1@1.com");
@@ -186,14 +187,21 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
         LOG.info("Open url");
         webDriver.get(AppConfig.getStartUrl());
         waitForPageLoaded1();
-        LOG.info("Click SignIn button");
-        mainPage.click(loginElements.getSignInButtonLobby());
-        LOG.info("Enter login");
+        LOG.info("Wait for Profile button");
+        waitForElementDisplayed(loginElements.getHomeProfileButton());
+        LOG.info("Click on Profile button");
+        webDriver.findElement(loginElements.getHomeProfileButton()).click();
+        LOG.info("Choose email field");
+        webDriver.findElement(loginElements.getInputLoginById()).click();
+        LOG.info("Enter email");
         webDriver.findElement(loginElements.getInputLoginById()).sendKeys("1@1.com");
+        LOG.info("Click Continue with Email");
+        webDriver.findElement(loginElements.getContinueEmailButton()).click();
         LOG.info("Enter password");
         webDriver.findElement(loginElements.getInputPasswordById()).sendKeys("1111111");
         LOG.info("Click Login button");
         webDriver.findElement(loginElements.getSignInButton()).click();
+        waitForPageLoaded1();
         LOG.info("Check that exception displayed");
     }
     public void playVideo() throws InterruptedException{
@@ -245,26 +253,28 @@ public class AccountBasicTestsExecutor extends BasicTestsExecutor {
 
     public void addVideoFile() throws InterruptedException{
         LOG.info("Click Create Content");
-        webDriver.findElement(By.id("create_menu")).click();
+        webDriver.findElement(By.xpath("//*[@id=\"create_menu\"][2]")).click();
         LOG.info("Click Upload Video");
-        webDriver.findElement(By.id("create_video")).click();
-        WebElement fileUpload = webDriver.findElement(By.xpath("//*[@id=\"upload_area\"]/div/form/input"));
+        webDriver.findElement(By.xpath("//*[@id=\"create_video\"]/a/button")).click();
+        WebElement fileUpload = webDriver.findElement(By.id("upload-video-input"));
         String filePath = AccountBasicTestsExecutor.class.getClassLoader().getResource("videoplayback.mp4").getPath();
         LOG.info("Add video file");
         fileUpload.sendKeys(filePath);
         Thread.sleep(2500);
         LOG.info("Choose thumbnail");
-        webDriver.findElement(By.xpath("//*[@id=\"thumb_1\"]")).click();
+        WebDriverWait wait = new WebDriverWait(getWebDriver(), 20);
+        Boolean element = wait.until(ExpectedConditions.textToBePresentInElementLocated(By.className("progress__label"),"Uploading 100%"));
+        webDriver.findElement(By.id("thumb_wrap_1")).click();
         LOG.info("Add video name");
-        webDriver.findElement(By.xpath("//*[@id=\"video_name_input\"]")).sendKeys("Video");
+        webDriver.findElement(By.id("video_name_input")).sendKeys("VideoAutomationTest");
         LOG.info("Add video description");
-        webDriver.findElement(By.xpath("//*[@id=\"video_description_input\"]")).sendKeys("AutomationTestCreatedBy");
+        webDriver.findElement(By.id("video_description_input")).sendKeys("AutomationTestCreatedBy");
         LOG.info("Scroll to the bottom of the page");
         ((JavascriptExecutor) webDriver).executeScript(
-                "arguments[0].scrollIntoView();", webDriver.findElement(By.xpath("//*[@id=\"video_save_btn\"]")));
+                "arguments[0].scrollIntoView();", webDriver.findElement(By.id("video_save_btn")));
         Thread.sleep(2500);
         LOG.info("Click save button");
-        webDriver.findElement(By.xpath("//*[@id=\"video_save_btn\"]")).click();
+        webDriver.findElement(By.id("video_save_btn")).click();
     }
 
     public void removeVideoFileFromVideoView()throws InterruptedException{
